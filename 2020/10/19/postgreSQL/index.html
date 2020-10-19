@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content>
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+          postgreSQL - Hades的博客 | hades Blog
+        
+    </title>
+
+    <link rel="canonical" href="https://zhanghangwei-git.github.io/2020/10/19/postgreSQL/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+	
+	
+
+
+
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Hades Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archives/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    
+<!-- Image to hack wechat -->
+<!-- <img src="https://zhanghangwei-git.github.io/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#数据库" title="数据库">数据库</a>
+                        
+                          <a class="tag" href="/tags/#postger" title="postger">postger</a>
+                        
+                    </div>
+                    <h1>postgreSQL</h1>
+                    <h2 class="subheading">开始是成功的第一步</h2>
+                    <span class="meta">
+                        Posted by Hades on
+                        2020-10-19
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>update t_xl_tz set set_top_time   = to_timestamp ( #{date}, ‘yyyy-mm-dd HH24:mi:ss’ ) where id = #{id }</p>
+<h2 id="查询每一条记录的最新数据"><a href="#查询每一条记录的最新数据" class="headerlink" title="查询每一条记录的最新数据"></a>查询每一条记录的最新数据</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id="findAll"  resultType="com.dabao.model.StagnantWaterEntity"&gt;</span><br><span class="line">        <span class="keyword">select</span> *</span><br><span class="line">        <span class="keyword">from</span> t_bs_stagnant_water a</span><br><span class="line">        <span class="keyword">where</span> <span class="keyword">not</span> <span class="keyword">exists</span>(<span class="keyword">select</span> <span class="number">1</span> <span class="keyword">from</span> t_bs_stagnant_water <span class="keyword">where</span> address=a.address <span class="keyword">and</span> update_time&gt;a.update_time)</span><br><span class="line">    &lt;/<span class="keyword">select</span>&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="动态查询数据"><a href="#动态查询数据" class="headerlink" title="动态查询数据"></a>动态查询数据</h1><figure class="highlight dust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"findCrossingInformation"</span> <span class="attr">parameterType</span>=<span class="string">"com.dabao.model.CrossingEntity"</span> <span class="attr">resultType</span>=<span class="string">"map"</span>&gt;</span></span></span><br><span class="line"><span class="xml">        select</span></span><br><span class="line"><span class="xml">        *</span></span><br><span class="line"><span class="xml">        from</span></span><br><span class="line"><span class="xml">        t_bs_crossing</span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">where</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"id!=null and id!=''"</span>&gt;</span></span></span><br><span class="line"><span class="xml">                and id=#</span><span class="template-variable">&#123;id&#125;</span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"crossingId!=null and crossingId!=''"</span>&gt;</span></span></span><br><span class="line"><span class="xml">                and crossing_id=#</span><span class="template-variable">&#123;crossingId&#125;</span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"crossingIndex!=null and crossingIndex!=''"</span>&gt;</span></span></span><br><span class="line"><span class="xml">                and crossing_index=#</span><span class="template-variable">&#123;crossingIndex&#125;</span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"crossingName!=null and crossingName!=''"</span>&gt;</span></span></span><br><span class="line"><span class="xml">                and crossing_name like '%' || #</span><span class="template-variable">&#123;crossingName&#125;</span><span class="xml"> || '%'</span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"crossingType!=null and crossingType!=''"</span>&gt;</span></span></span><br><span class="line"><span class="xml">                and crossing_type=#</span><span class="template-variable">&#123;crossingType&#125;</span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"controlUnit!=null and controlUnit!=''"</span>&gt;</span></span></span><br><span class="line"><span class="xml">                and control_unit=#</span><span class="template-variable">&#123;controlUnit&#125;</span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"district!=null and district!=''"</span>&gt;</span></span></span><br><span class="line"><span class="xml">                and district=#</span><span class="template-variable">&#123;district&#125;</span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">where</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="动态添加数据"><a href="#动态添加数据" class="headerlink" title="动态添加数据"></a>动态添加数据</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">&lt;insert id="add" parameterType="com.dabao.model.StagnantWaterEntity"&gt;</span><br><span class="line">    <span class="keyword">insert</span> <span class="keyword">into</span> t_bs_stagnant_water</span><br><span class="line">    &lt;<span class="keyword">trim</span> prefix=<span class="string">"("</span> suffix=<span class="string">")"</span> suffixOverrides=<span class="string">","</span>&gt;</span><br><span class="line">        &lt;<span class="keyword">if</span> <span class="keyword">test</span>=<span class="string">"id != null"</span>&gt;</span><br><span class="line">            <span class="keyword">id</span>,</span><br><span class="line">        &lt;/<span class="keyword">if</span>&gt;</span><br><span class="line">        &lt;<span class="keyword">if</span> <span class="keyword">test</span>=<span class="string">"address != null"</span>&gt;</span><br><span class="line">            address,</span><br><span class="line">        &lt;/<span class="keyword">if</span>&gt;</span><br><span class="line">        &lt;<span class="keyword">if</span> <span class="keyword">test</span>=<span class="string">"lng != null"</span>&gt;</span><br><span class="line">            lng,</span><br><span class="line">        &lt;/<span class="keyword">if</span>&gt;</span><br><span class="line">        &lt;<span class="keyword">if</span> <span class="keyword">test</span>=<span class="string">"lat != null"</span>&gt;</span><br><span class="line">            lat,</span><br><span class="line">        &lt;/<span class="keyword">if</span>&gt;</span><br><span class="line">        &lt;<span class="keyword">if</span> <span class="keyword">test</span>=<span class="string">"water_volume != null"</span>&gt;</span><br><span class="line">            water_volume,</span><br><span class="line">        &lt;/<span class="keyword">if</span>&gt;</span><br><span class="line">        &lt;<span class="keyword">if</span> <span class="keyword">test</span>=<span class="string">"rainfall != null"</span>&gt;</span><br><span class="line">            rainfall,</span><br><span class="line">        &lt;/<span class="keyword">if</span>&gt;</span><br><span class="line">        &lt;<span class="keyword">if</span> <span class="keyword">test</span>=<span class="string">"type != null"</span>&gt;</span><br><span class="line">            <span class="keyword">type</span>,</span><br><span class="line">        &lt;/<span class="keyword">if</span>&gt;</span><br><span class="line">        &lt;<span class="keyword">if</span> <span class="keyword">test</span>=<span class="string">"create_time ==null"</span>&gt;</span><br><span class="line">            create_time,</span><br><span class="line">    &lt;/<span class="keyword">if</span>&gt;</span><br><span class="line">        &lt;<span class="keyword">if</span> <span class="keyword">test</span>=<span class="string">"update_time ==null "</span>&gt;</span><br><span class="line">            update_time,</span><br><span class="line">        &lt;/<span class="keyword">if</span>&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &lt;/<span class="keyword">trim</span>&gt;</span><br><span class="line">    &lt;<span class="keyword">trim</span> prefix=<span class="string">"values ("</span> suffix=<span class="string">")"</span> suffixOverrides=<span class="string">","</span>&gt;</span><br><span class="line">        &lt;<span class="keyword">if</span> <span class="keyword">test</span>=<span class="string">"id != null"</span>&gt;</span><br><span class="line">            <span class="comment">#&#123;id,jdbcType=VARCHAR&#125;,</span></span><br><span class="line">        &lt;/<span class="keyword">if</span>&gt;</span><br><span class="line">        &lt;<span class="keyword">if</span> <span class="keyword">test</span>=<span class="string">"address != null"</span>&gt;</span><br><span class="line">            <span class="comment">#&#123;address,jdbcType=VARCHAR&#125;,</span></span><br><span class="line">        &lt;/<span class="keyword">if</span>&gt;</span><br><span class="line">        &lt;<span class="keyword">if</span> <span class="keyword">test</span>=<span class="string">"lng != null"</span>&gt;</span><br><span class="line">            <span class="comment">#&#123;lng,jdbcType=VARCHAR&#125;,</span></span><br><span class="line">        &lt;/<span class="keyword">if</span>&gt;</span><br><span class="line">        &lt;<span class="keyword">if</span> <span class="keyword">test</span>=<span class="string">"lat != null"</span>&gt;</span><br><span class="line">            <span class="comment">#&#123;lat,jdbcType=VARCHAR&#125;,</span></span><br><span class="line">        &lt;/<span class="keyword">if</span>&gt;</span><br><span class="line">        &lt;<span class="keyword">if</span> <span class="keyword">test</span>=<span class="string">"water_volume != null"</span>&gt;</span><br><span class="line">            <span class="comment">#&#123;water_volume&#125;,</span></span><br><span class="line">        &lt;/<span class="keyword">if</span>&gt;</span><br><span class="line">        &lt;<span class="keyword">if</span> <span class="keyword">test</span>=<span class="string">"rainfall != null"</span>&gt;</span><br><span class="line">            <span class="comment">#&#123;rainfall&#125;,</span></span><br><span class="line">        &lt;/<span class="keyword">if</span>&gt;</span><br><span class="line"></span><br><span class="line">        &lt;<span class="keyword">if</span> <span class="keyword">test</span>=<span class="string">"type != null"</span>&gt;</span><br><span class="line">            <span class="comment">#&#123;type,jdbcType=VARCHAR&#125;,</span></span><br><span class="line">        &lt;/<span class="keyword">if</span>&gt;</span><br><span class="line">        &lt;<span class="keyword">if</span> <span class="keyword">test</span>=<span class="string">"create_time ==null"</span>&gt;</span><br><span class="line">            <span class="keyword">NOW</span>(),</span><br><span class="line">        &lt;/<span class="keyword">if</span>&gt;</span><br><span class="line">        &lt;<span class="keyword">if</span> <span class="keyword">test</span>=<span class="string">"update_time==null"</span>&gt;</span><br><span class="line">            <span class="keyword">NOW</span>(),</span><br><span class="line">        &lt;/<span class="keyword">if</span>&gt;</span><br><span class="line">    &lt;/<span class="keyword">trim</span>&gt;</span><br><span class="line">&lt;/<span class="keyword">insert</span>&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="子查询"><a href="#子查询" class="headerlink" title="子查询"></a>子查询</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id="findSWSData" parameterType="String" resultType="hashMap"&gt;</span><br><span class="line">    <span class="keyword">SELECT</span></span><br><span class="line">    to_char ( t.update_time, <span class="string">'yyyy-mm-dd HH24'</span> ),</span><br><span class="line">    <span class="keyword">max</span>(t.rainfall) <span class="keyword">as</span> rainfall,</span><br><span class="line">    <span class="keyword">max</span>(t.water_volume) <span class="keyword">as</span> waterVolume</span><br><span class="line">    <span class="keyword">FROM</span></span><br><span class="line">    (</span><br><span class="line">    <span class="keyword">SELECT</span></span><br><span class="line">    *</span><br><span class="line">    <span class="keyword">FROM</span></span><br><span class="line">    t_bs_stagnant_water w</span><br><span class="line">    <span class="keyword">WHERE</span></span><br><span class="line">    w.address = <span class="comment">#&#123;address&#125;</span></span><br><span class="line"></span><br><span class="line">    &lt;<span class="keyword">if</span> <span class="keyword">test</span>=<span class="string">"StartingTime != null and StartingTime != ''"</span>&gt;</span><br><span class="line">    <span class="keyword">AND</span> w.update_time &lt;![CDATA[&gt;=]]&gt;to_timestamp ( <span class="comment">#&#123;StartingTime&#125;, 'yyyy-mm-dd HH24:mi:ss' )</span></span><br><span class="line">    &lt;/<span class="keyword">if</span>&gt;</span><br><span class="line">    &lt;<span class="keyword">if</span> <span class="keyword">test</span>=<span class="string">"EndTime != null and EndTime != ''"</span>&gt;</span><br><span class="line">    <span class="keyword">AND</span> w.update_time &lt;![CDATA[&lt;=]]&gt;to_timestamp ( <span class="comment">#&#123;EndTime&#125;, 'yyyy-mm-dd HH24:mi:ss' )</span></span><br><span class="line">    &lt;/<span class="keyword">if</span>&gt;</span><br><span class="line">    ) t</span><br><span class="line">    <span class="keyword">GROUP</span> <span class="keyword">BY</span> to_char ( t.update_time, <span class="string">'yyyy-mm-dd HH24'</span> )</span><br><span class="line">&lt;/<span class="keyword">select</span>&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="动态更新"><a href="#动态更新" class="headerlink" title="动态更新"></a>动态更新</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">&lt;update id="updateById"  parameterType="com.dabao.model.StagnantWaterEntity" &gt;</span><br><span class="line">    <span class="keyword">update</span> t_bs_stagnant_water</span><br><span class="line">    &lt;<span class="keyword">set</span>&gt;</span><br><span class="line"></span><br><span class="line">        &lt;<span class="keyword">if</span> <span class="keyword">test</span>=<span class="string">'address != null and address != "" '</span>&gt;</span><br><span class="line">            address = <span class="comment">#&#123;address, jdbcType=VARCHAR&#125;,</span></span><br><span class="line">        &lt;/<span class="keyword">if</span>&gt;</span><br><span class="line">        &lt;<span class="keyword">if</span> <span class="keyword">test</span>=<span class="string">'lng != null and lng != "" '</span>&gt;</span><br><span class="line">            lng = <span class="comment">#&#123;lng, jdbcType=VARCHAR&#125;,</span></span><br><span class="line">        &lt;/<span class="keyword">if</span>&gt;</span><br><span class="line">        &lt;<span class="keyword">if</span> <span class="keyword">test</span>=<span class="string">'lat != null and lat != "" '</span>&gt;</span><br><span class="line">            lat = <span class="comment">#&#123;lat, jdbcType=VARCHAR&#125;,</span></span><br><span class="line">        &lt;/<span class="keyword">if</span>&gt;</span><br><span class="line">        &lt;<span class="keyword">if</span> <span class="keyword">test</span>=<span class="string">'water_volume != null and water_volume != "" '</span>&gt;</span><br><span class="line">            water_volume = <span class="comment">#&#123;water_volume&#125;,</span></span><br><span class="line">        &lt;/<span class="keyword">if</span>&gt;</span><br><span class="line">        &lt;<span class="keyword">if</span> <span class="keyword">test</span>=<span class="string">'rainfall != null and rainfall != "" '</span>&gt;</span><br><span class="line">            rainfall = <span class="comment">#&#123;rainfall&#125;,</span></span><br><span class="line">        &lt;/<span class="keyword">if</span>&gt;</span><br><span class="line">        &lt;<span class="keyword">if</span> <span class="keyword">test</span>=<span class="string">'type != null and type != "" '</span>&gt;</span><br><span class="line">            <span class="keyword">type</span> = <span class="comment">#&#123;type, jdbcType=VARCHAR&#125;,</span></span><br><span class="line">        &lt;/<span class="keyword">if</span>&gt;</span><br><span class="line"></span><br><span class="line">            update_time = <span class="keyword">NOW</span>(),</span><br><span class="line">        &lt;<span class="keyword">if</span> <span class="keyword">test</span>=<span class="string">'rainfall_threshold != null and rainfall_threshold != "" '</span>&gt;</span><br><span class="line">            <span class="keyword">type</span> = <span class="comment">#&#123;rainfall_threshold, jdbcType=VARCHAR&#125;,</span></span><br><span class="line">        &lt;/<span class="keyword">if</span>&gt;</span><br><span class="line">        &lt;<span class="keyword">if</span> <span class="keyword">test</span>=<span class="string">'control_unit_code != null and control_unit_code != "" '</span>&gt;</span><br><span class="line">            <span class="keyword">type</span> = <span class="comment">#&#123;control_unit_code, jdbcType=VARCHAR&#125;,</span></span><br><span class="line">        &lt;/<span class="keyword">if</span>&gt;</span><br><span class="line">        &lt;<span class="keyword">if</span> <span class="keyword">test</span>=<span class="string">'control_unit != null and control_unit != "" '</span>&gt;</span><br><span class="line">            <span class="keyword">type</span> = <span class="comment">#&#123;control_unit, jdbcType=VARCHAR&#125;,</span></span><br><span class="line">        &lt;/<span class="keyword">if</span>&gt;</span><br><span class="line">        &lt;<span class="keyword">if</span> <span class="keyword">test</span>=<span class="string">'control_leader != null and control_leader != "" '</span>&gt;</span><br><span class="line">            <span class="keyword">type</span> = <span class="comment">#&#123;control_leader, jdbcType=VARCHAR&#125;,</span></span><br><span class="line">        &lt;/<span class="keyword">if</span>&gt;</span><br><span class="line">        &lt;<span class="keyword">if</span> <span class="keyword">test</span>=<span class="string">'leader_post != null and leader_post != "" '</span>&gt;</span><br><span class="line">            <span class="keyword">type</span> = <span class="comment">#&#123;leader_post, jdbcType=VARCHAR&#125;,</span></span><br><span class="line">        &lt;/<span class="keyword">if</span>&gt;</span><br><span class="line">        &lt;<span class="keyword">if</span> <span class="keyword">test</span>=<span class="string">'leader_tel != null and leader_tel != "" '</span>&gt;</span><br><span class="line">            <span class="keyword">type</span> = <span class="comment">#&#123;leader_tel, jdbcType=VARCHAR&#125;,</span></span><br><span class="line">        &lt;/<span class="keyword">if</span>&gt;</span><br><span class="line">        &lt;<span class="keyword">if</span> <span class="keyword">test</span>=<span class="string">'police != null and police != "" '</span>&gt;</span><br><span class="line">            <span class="keyword">type</span> = <span class="comment">#&#123;police, jdbcType=VARCHAR&#125;,</span></span><br><span class="line">        &lt;/<span class="keyword">if</span>&gt;</span><br><span class="line">        &lt;<span class="keyword">if</span> <span class="keyword">test</span>=<span class="string">'police_post != null and police_post != "" '</span>&gt;</span><br><span class="line">            <span class="keyword">type</span> = <span class="comment">#&#123;police_post, jdbcType=VARCHAR&#125;,</span></span><br><span class="line">        &lt;/<span class="keyword">if</span>&gt;</span><br><span class="line">        &lt;<span class="keyword">if</span> <span class="keyword">test</span>=<span class="string">'police_tel != null and police_tel != "" '</span>&gt;</span><br><span class="line">            <span class="keyword">type</span> = <span class="comment">#&#123;police_tel, jdbcType=VARCHAR&#125;,</span></span><br><span class="line">        &lt;/<span class="keyword">if</span>&gt;</span><br><span class="line"></span><br><span class="line">    &lt;/<span class="keyword">set</span>&gt;</span><br><span class="line">    <span class="keyword">where</span> <span class="keyword">id</span> = <span class="comment">#&#123;id, jdbcType=VARCHAR&#125;</span></span><br><span class="line">&lt;/<span class="keyword">update</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>去重distinct</p>
+<p>select  distinct name from table</p>
+<h1 id="MySQL-计算两个时间的差值"><a href="#MySQL-计算两个时间的差值" class="headerlink" title="[MySQL 计算两个时间的差值]"></a>[MySQL 计算两个时间的差值]</h1><hr>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">TIMESTAMPDIFF(type,exp2,exp1)</span><br><span class="line"></span><br><span class="line">type:year,month,day,HOUR,min,second等</span><br><span class="line"></span><br><span class="line">例如：<span class="keyword">select</span> <span class="keyword">TIMESTAMPDIFF</span>(<span class="keyword">SECOND</span>,<span class="string">'2012-10-1 2:0:0'</span>,<span class="string">'2012-10-1 2:0:3'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">TIMESTAMPDIFF</span>(<span class="keyword">type</span>,exp2,exp1)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span>:<span class="keyword">year</span>,<span class="keyword">month</span>,<span class="keyword">day</span>,<span class="keyword">HOUR</span>,<span class="keyword">min</span>,<span class="keyword">second</span>等</span><br><span class="line"></span><br><span class="line">例如：<span class="keyword">select</span> <span class="keyword">TIMESTAMPDIFF</span>(<span class="keyword">SECOND</span>,<span class="string">'2012-10-1 2:0:0'</span>,<span class="string">'2012-10-1 2:0:3'</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Student <span class="keyword">values</span>(<span class="string">'13'</span> , <span class="string">'孙七'</span> , <span class="string">'2014-09-09'</span> , <span class="string">'女'</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Student <span class="keyword">values</span>(<span class="string">'13'</span> , <span class="string">'孙七'</span> , <span class="string">'2014-09-12'</span> , <span class="string">'女'</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Student <span class="keyword">values</span>(<span class="string">'13'</span> , <span class="string">'孙七'</span> , <span class="string">'2014-09-17'</span> , <span class="string">'女'</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Student <span class="keyword">values</span>(<span class="string">'13'</span> , <span class="string">'孙七'</span> , <span class="string">'2014-10-01'</span> , <span class="string">'女'</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Student <span class="keyword">values</span>(<span class="string">'13'</span> , <span class="string">'孙七'</span> , <span class="string">'2014-09-20'</span> , <span class="string">'女'</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">查询各科成绩前三名的记录</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> sc</span><br><span class="line"><span class="keyword">where</span> (</span><br><span class="line"><span class="keyword">select</span> <span class="keyword">count</span>(*) <span class="keyword">from</span> sc <span class="keyword">as</span> a </span><br><span class="line"><span class="keyword">where</span> sc.cid = a.cid <span class="keyword">and</span> sc.score&lt;a.score </span><br><span class="line">)&lt; <span class="number">3</span></span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> cid <span class="keyword">asc</span>, sc.score <span class="keyword">desc</span>;</span><br><span class="line"></span><br><span class="line">查询学过「张三」老师授课的同学的信息</span><br><span class="line">（多表联合查询）</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> student.* <span class="keyword">from</span> student,teacher,course,sc</span><br><span class="line"><span class="keyword">where</span> </span><br><span class="line">    student.sid = sc.sid </span><br><span class="line">    <span class="keyword">and</span> course.cid=sc.cid </span><br><span class="line">    <span class="keyword">and</span> course.tid = teacher.tid </span><br><span class="line">    <span class="keyword">and</span> tname = <span class="string">'张三'</span>;</span><br><span class="line">    </span><br><span class="line"> 查有成绩的学生信息</span><br><span class="line"> （子查询）</span><br><span class="line"> <span class="keyword">select</span> * <span class="keyword">from</span> student </span><br><span class="line"><span class="keyword">where</span> <span class="keyword">exists</span> (<span class="keyword">select</span> sc.sid <span class="keyword">from</span> sc <span class="keyword">where</span> student.sid = sc.sid);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">查询每门课程被选修的学生数</span><br><span class="line">（分组统计）</span><br><span class="line"><span class="keyword">select</span> CId , <span class="keyword">count</span>(<span class="keyword">SId</span>) <span class="keyword">as</span> countSex <span class="keyword">from</span> sc</span><br><span class="line"> <span class="keyword">group</span> <span class="keyword">by</span> CId </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">查询出只选修两门课程的学生学号和姓名</span><br><span class="line">(子查询加嵌套查询）</span><br><span class="line"><span class="keyword">select</span> st.SId, st.Sname</span><br><span class="line"><span class="keyword">from</span> student <span class="keyword">as</span> st</span><br><span class="line"><span class="keyword">where</span> st.SId <span class="keyword">in</span> </span><br><span class="line">(<span class="keyword">select</span> s.SId <span class="keyword">from</span> sc  <span class="keyword">as</span> s</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> s.SId</span><br><span class="line"><span class="keyword">having</span> <span class="keyword">count</span>(s.CId) = <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">（内连接查询）</span><br><span class="line"><span class="keyword">select</span> st.SId, st.Sname <span class="keyword">from</span> student <span class="keyword">as</span> st</span><br><span class="line"><span class="keyword">inner</span> <span class="keyword">join</span> sc <span class="keyword">as</span> a</span><br><span class="line"><span class="keyword">on</span> a.SId = st.SId</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> a.SId</span><br><span class="line"><span class="keyword">having</span> <span class="keyword">count</span>(a.CId) = <span class="number">2</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">查询男生、女生人数</span><br><span class="line">（分组统计）</span><br><span class="line"><span class="keyword">select</span> Ssex ,<span class="keyword">count</span>(<span class="keyword">SId</span>) <span class="keyword">from</span> student</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> Ssex</span><br><span class="line"></span><br><span class="line">查询名字中含有「风」字的学生信息</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> student</span><br><span class="line"><span class="keyword">where</span> Sname <span class="keyword">like</span> <span class="string">'%风%'</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">查询同名同性学生名单，并统计同名人数</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> Sname , <span class="keyword">count</span>(<span class="keyword">SId</span>)  <span class="keyword">as</span>  <span class="built_in">number</span></span><br><span class="line"><span class="keyword">from</span> student</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> Sname</span><br><span class="line"><span class="keyword">having</span> <span class="keyword">count</span>(<span class="keyword">SId</span>)&gt;<span class="number">1</span></span><br><span class="line"></span><br><span class="line">查询 <span class="number">1990</span> 年出生的学生名单</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> *  <span class="keyword">from</span> student <span class="keyword">where</span> <span class="keyword">DATE_FORMAT</span>(Sage, <span class="string">'%Y-%m-%d'</span>) <span class="keyword">like</span> <span class="string">'1990%'</span> </span><br><span class="line"></span><br><span class="line">查询平均成绩大于等于 <span class="number">85</span> 的所有学生的学号、姓名和平均成绩</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> st.SId , st.Sname ,<span class="keyword">avg</span>(a.score) <span class="keyword">as</span> <span class="keyword">avg</span></span><br><span class="line"><span class="keyword">from</span> student  <span class="keyword">as</span> st</span><br><span class="line"><span class="keyword">inner</span> <span class="keyword">join</span> sc <span class="keyword">as</span> a <span class="keyword">on</span> st.SId  =  a.SId</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> a.SId</span><br><span class="line"></span><br><span class="line">查询课程名称为「数学」，且分数低于 <span class="number">60</span> 的学生姓名和分数</span><br><span class="line"><span class="keyword">select</span> st.Sname , c.Cname, s.score </span><br><span class="line"><span class="keyword">from</span> student  <span class="keyword">as</span> st</span><br><span class="line"><span class="keyword">inner</span> <span class="keyword">join</span> sc <span class="keyword">as</span> s <span class="keyword">on</span> s.SId = st.SId</span><br><span class="line"><span class="keyword">inner</span> <span class="keyword">join</span> course <span class="keyword">as</span> c <span class="keyword">on</span> c.CId = s.CID</span><br><span class="line"><span class="keyword">where</span> c.Cname = <span class="string">'数学'</span> <span class="keyword">and</span> s.score &lt;<span class="number">60</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">查询所有学生的课程及分数情况（存在学生没成绩，没选课的情况）</span><br><span class="line"><span class="keyword">select</span> st.Sname ,c.Cname, s.score <span class="keyword">from</span>  student <span class="keyword">as</span> st ,sc <span class="keyword">as</span> s , course <span class="keyword">as</span> c</span><br><span class="line"><span class="keyword">where</span> s.SId  =  st.SId <span class="keyword">and</span> c.CId = s.CId</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> c.Cname</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">查询任何一门课程成绩在 <span class="number">70</span> 分以上的姓名、课程名称和分数</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> st.Sname ,c.Cname, s.score <span class="keyword">from</span>  student <span class="keyword">as</span> st ,sc <span class="keyword">as</span> s , course <span class="keyword">as</span> c</span><br><span class="line"><span class="keyword">where</span> s.SId  =  st.SId <span class="keyword">and</span> c.CId = s.CId</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> st.Sname</span><br><span class="line"><span class="keyword">having</span> </span><br><span class="line"></span><br><span class="line">查询存在不及格的课程名字</span><br><span class="line"><span class="keyword">select</span> c.Cname </span><br><span class="line"><span class="keyword">from</span> course  <span class="keyword">as</span> c</span><br><span class="line"><span class="keyword">inner</span> <span class="keyword">join</span> sc <span class="keyword">as</span> s <span class="keyword">on</span> s.CId = c.CId</span><br><span class="line"><span class="keyword">where</span> s.score&lt;<span class="number">60</span></span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> s.CId</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">查询课程编号为 <span class="number">01</span> 且课程成绩在 <span class="number">80</span> 分以上的学生的学号和姓名</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">求每门课程的学生人数</span><br><span class="line"><span class="keyword">select</span> c.Cname ,   <span class="keyword">count</span>(s.SId)  <span class="keyword">as</span> <span class="keyword">count</span></span><br><span class="line"><span class="keyword">from</span> course  <span class="keyword">as</span> c</span><br><span class="line"><span class="keyword">inner</span> <span class="keyword">join</span> sc <span class="keyword">as</span> s <span class="keyword">on</span> c.CId = s.CId</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> s.CId</span><br><span class="line"></span><br><span class="line">成绩不重复，查询选修「张三」老师所授课程的学生中，成绩最高的学生信息及其成绩   </span><br><span class="line"><span class="keyword">select</span> st.*,s.score </span><br><span class="line"><span class="keyword">from</span>  sc <span class="keyword">as</span> s</span><br><span class="line"><span class="keyword">where</span> s.SId=</span><br><span class="line">（<span class="keyword">select</span>  s1.SId  <span class="keyword">from</span>  sc <span class="keyword">as</span> s1  </span><br><span class="line"><span class="keyword">where</span> s1.CId = </span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> (<span class="keyword">select</span> c.CId <span class="keyword">from</span> course <span class="keyword">as</span> c ,   teacher <span class="keyword">as</span> t <span class="keyword">where</span> t.TId = c. TId <span class="keyword">and</span>  t.Tname = <span class="string">'张三'</span> ) <span class="keyword">group</span> <span class="keyword">by</span>  <span class="keyword">group</span> <span class="keyword">by</span> (<span class="keyword">select</span> c.CId <span class="keyword">from</span> course <span class="keyword">as</span> c ,   teacher <span class="keyword">as</span> t <span class="keyword">where</span> t.TId = c. TId <span class="keyword">and</span>  t.Tname = <span class="string">'张三'</span> ) )</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">成绩有重复的情况下，查询选修「张三」老师所授课程的学生中，成绩最高的学生信息及其成绩</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">查询不同课程成绩相同的学生的学生编号、课程编号、学生成绩</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">查询每门功成绩最好的前两名</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">统计每门课程的学生选修人数（超过 <span class="number">5</span> 人的课程才统计）。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">检索至少选修两门课程的学生学号</span><br><span class="line"><span class="keyword">select</span> <span class="keyword">SId</span> <span class="keyword">from</span> sc </span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> <span class="keyword">SId</span></span><br><span class="line"><span class="keyword">having</span> <span class="keyword">count</span>(CId)&gt;<span class="number">1</span></span><br><span class="line"></span><br><span class="line">查询选修了全部课程的学生信息</span><br><span class="line"><span class="keyword">select</span> st.* <span class="keyword">from</span> sc <span class="keyword">as</span> s ,student <span class="keyword">as</span> st</span><br><span class="line"><span class="keyword">where</span> s.SId = st.SId </span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> <span class="keyword">SId</span></span><br><span class="line"><span class="keyword">having</span> <span class="keyword">count</span>(CId)=(<span class="keyword">select</span> <span class="keyword">count</span>(*) <span class="keyword">from</span> course)</span><br><span class="line"></span><br><span class="line">查询各学生的年龄，只按年份来算</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> Sname , <span class="keyword">TIMESTAMPDIFF</span>(<span class="keyword">year</span>,Sage,<span class="keyword">CURDATE</span>())     <span class="keyword">as</span>  age </span><br><span class="line"><span class="keyword">from</span> student </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">按照出生日期来算，当前月日 &lt; 出生年月的月日则，年龄减一</span><br><span class="line"></span><br><span class="line">查询本周过生日的学生</span><br><span class="line"><span class="keyword">select</span> *</span><br><span class="line"><span class="keyword">from</span> student </span><br><span class="line"><span class="keyword">where</span> <span class="keyword">WEEKOFYEAR</span>(student.Sage)=<span class="keyword">WEEKOFYEAR</span>(<span class="keyword">CURDATE</span>());</span><br><span class="line"></span><br><span class="line">查询下周过生日的学生</span><br><span class="line"><span class="keyword">select</span> *</span><br><span class="line"><span class="keyword">from</span> student </span><br><span class="line"><span class="keyword">where</span> <span class="keyword">WEEKOFYEAR</span>(student.Sage)= (<span class="keyword">WEEKOFYEAR</span>(<span class="keyword">CURDATE</span>()+<span class="number">1</span>));</span><br><span class="line"></span><br><span class="line">查询本月过生日的学生</span><br><span class="line"><span class="keyword">select</span> *</span><br><span class="line"><span class="keyword">from</span> student </span><br><span class="line"><span class="keyword">where</span> <span class="keyword">MONTH</span>(student.Sage)=<span class="keyword">MONTH</span>(<span class="keyword">CURDATE</span>());</span><br><span class="line"></span><br><span class="line">查询下月过生日的学生</span><br><span class="line"><span class="keyword">select</span> *</span><br><span class="line"><span class="keyword">from</span> student </span><br><span class="line"><span class="keyword">where</span> <span class="keyword">MONTH</span>(student.Sage)=<span class="keyword">MONTH</span>(<span class="keyword">CURDATE</span>()+<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+<h1 id="查询这个月内每天8-00到9-00数据库的数据"><a href="#查询这个月内每天8-00到9-00数据库的数据" class="headerlink" title="查询这个月内每天8:00到9:00数据库的数据"></a>查询这个月内每天8:00到9:00数据库的数据</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> t_bs_stagnant_water <span class="keyword">as</span> sw</span><br><span class="line"></span><br><span class="line"><span class="keyword">WHERE</span> </span><br><span class="line">to_char(sw.update_time,<span class="string">'yyyy-mm'</span>)=to_char(<span class="keyword">now</span>(),<span class="string">'yyyy-mm'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">and</span> to_char(sw.update_time,<span class="string">'HH24:mi:ss'</span>)&gt;=<span class="string">'09:00:00'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">and</span> to_char(sw.update_time,<span class="string">'HH24:mi:ss'</span>)&lt;=<span class="string">'10:00:00'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> sw.update_time <span class="keyword">ASC</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line"><span class="keyword">CASE</span> case_status <span class="keyword">WHEN</span> <span class="string">'0'</span> <span class="keyword">THEN</span> <span class="string">'NotDisposedOf'</span> <span class="keyword">WHEN</span> <span class="string">'1'</span> <span class="keyword">THEN</span> <span class="string">'UnderDisposal'</span></span><br><span class="line">    <span class="keyword">WHEN</span> <span class="string">'2'</span> <span class="keyword">THEN</span> <span class="string">'Feedback'</span></span><br><span class="line">    <span class="keyword">WHEN</span> <span class="string">'3'</span> <span class="keyword">THEN</span> <span class="string">'Completed'</span> <span class="keyword">ELSE</span> <span class="string">'other'</span></span><br><span class="line">    <span class="keyword">END</span> <span class="keyword">AS</span> <span class="keyword">STATUS</span>,<span class="keyword">count</span>( * )</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    ds_f_case_info</span><br><span class="line"><span class="keyword">WHERE</span></span><br><span class="line">    case_type = <span class="string">'030000'</span></span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span></span><br><span class="line">    case_status</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span>      </span><br><span class="line"> <span class="keyword">count</span>( * ) <span class="keyword">AS</span> <span class="keyword">num</span>,  </span><br><span class="line"> <span class="keyword">count</span>(<span class="keyword">if</span>(case_status=<span class="string">'01'</span>,<span class="literal">true</span>,<span class="literal">null</span>)) <span class="keyword">AS</span> untreated,   </span><br><span class="line"> <span class="keyword">count</span>(<span class="keyword">if</span>(case_status=<span class="string">'02'</span>,<span class="literal">true</span>,<span class="literal">null</span>)) <span class="keyword">AS</span> processing,</span><br><span class="line">  <span class="keyword">count</span>(<span class="keyword">if</span>(case_status=<span class="string">'03'</span>,<span class="literal">true</span>,<span class="literal">null</span>)) <span class="keyword">AS</span> feedback  </span><br><span class="line"> <span class="keyword">FROM</span> <span class="string">`sc`</span></span><br></pre></td></tr></table></figure>
+<h2 id="postgre-查询同一字段不同状态的数据"><a href="#postgre-查询同一字段不同状态的数据" class="headerlink" title="postgre 查询同一字段不同状态的数据"></a>postgre 查询同一字段不同状态的数据</h2><figure class="highlight dust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"getPoliceStatisticsCountByCondition"</span> <span class="attr">parameterType</span>=<span class="string">"String"</span> <span class="attr">resultType</span>=<span class="string">"map"</span>&gt;</span></span></span><br><span class="line"><span class="xml">    SELECT</span></span><br><span class="line"><span class="xml">    sum (case when case_status  = '0' then 1 else 0 end ) as NotDisposedof,</span></span><br><span class="line"><span class="xml">    sum (case when case_status  = '1' then 1 else 0 end ) as UnderDispos,</span></span><br><span class="line"><span class="xml">    sum (case when case_status  = '2' then 1 else 0 end ) as feedback,</span></span><br><span class="line"><span class="xml">    FROM</span></span><br><span class="line"><span class="xml">        ds_f_case_info</span></span><br><span class="line"><span class="xml">    WHERE</span></span><br><span class="line"><span class="xml">        case_type = '030000'</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"startTime != null and startTime != ''"</span>&gt;</span></span></span><br><span class="line"><span class="xml">            and accept_time &lt;![CDATA[&gt;=]]&gt;to_timestamp( #</span><span class="template-variable">&#123;startTime&#125;</span><span class="xml">, 'yyyy-mm-dd HH24:mi:ss' )</span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"endTime != null and endTime != ''"</span>&gt;</span></span></span><br><span class="line"><span class="xml">            and accept_time &lt;![CDATA[&lt;=]]&gt; to_timestamp ( #</span><span class="template-variable">&#123;endTime&#125;</span><span class="xml">, 'yyyy-mm-dd HH24:mi:ss' )</span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="解决统计数据为零不打印的情况"><a href="#解决统计数据为零不打印的情况" class="headerlink" title="解决统计数据为零不打印的情况"></a>解决统计数据为零不打印的情况</h2><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="keyword">select</span> id=<span class="string">"getBrigadeM"</span> parameterType=<span class="string">"String"</span> resultType=<span class="string">"String"</span>&gt;</span><br><span class="line">        <span class="keyword">select</span></span><br><span class="line">        T.NotDisposedof+T.UnderDispos+T.Feedback <span class="keyword">as</span> Mnum</span><br><span class="line">        <span class="keyword">from</span></span><br><span class="line">        (<span class="keyword">select</span></span><br><span class="line">        depart_name,</span><br><span class="line">        sum(<span class="keyword">case</span>  <span class="keyword">when</span> case_status = <span class="string">'0'</span> then <span class="number">1</span> <span class="keyword">else</span> <span class="number">0</span> end ) <span class="keyword">as</span> NotDisposedof,</span><br><span class="line">        sum(<span class="keyword">case</span>  <span class="keyword">when</span> case_status = <span class="string">'1'</span> then <span class="number">1</span> <span class="keyword">else</span> <span class="number">0</span> end ) <span class="keyword">as</span> UnderDispos ,</span><br><span class="line">        sum(<span class="keyword">case</span>  <span class="keyword">when</span> case_status = <span class="string">'2'</span> then <span class="number">1</span> <span class="keyword">else</span> <span class="number">0</span> end ) <span class="keyword">as</span> Feedback</span><br><span class="line">        <span class="keyword">from</span>  ds_f_case_info</span><br><span class="line">        <span class="keyword">where</span></span><br><span class="line">        case_type = <span class="string">'030000'</span></span><br><span class="line">        and depart_name like <span class="string">'交警%'</span></span><br><span class="line">        &lt;<span class="keyword">if</span> test=<span class="string">"startTime != null and startTime != ''"</span>&gt;</span><br><span class="line">            and accept_time &lt;![CDATA[&gt;=]]&gt;(to_timestamp( <span class="meta">#&#123;startTime&#125;, 'yyyy-mm-dd HH24:mi:ss' )::TIMESTAMP  + '-1 month')</span></span><br><span class="line">        &lt;/<span class="keyword">if</span>&gt;</span><br><span class="line">        &lt;<span class="keyword">if</span> test=<span class="string">"endTime != null and endTime != ''"</span>&gt;</span><br><span class="line">            and accept_time &lt;![CDATA[&lt;=]]&gt; (to_timestamp ( <span class="meta">#&#123;endTime&#125;, 'yyyy-mm-dd HH24:mi:ss' )::TIMESTAMP  + '-1 month')</span></span><br><span class="line">        &lt;/<span class="keyword">if</span>&gt;</span><br><span class="line">        <span class="keyword">group</span> <span class="keyword">by</span> depart_name) <span class="keyword">as</span> T</span><br><span class="line">        right <span class="keyword">join</span></span><br><span class="line">        (<span class="keyword">select</span></span><br><span class="line">        depart_name</span><br><span class="line">        <span class="keyword">from</span>  ds_f_case_info</span><br><span class="line">        <span class="keyword">where</span></span><br><span class="line">        case_type = <span class="string">'030000'</span></span><br><span class="line">        and depart_name like <span class="string">'交警%'</span></span><br><span class="line">        <span class="keyword">group</span> <span class="keyword">by</span> depart_name) <span class="keyword">as</span> S</span><br><span class="line">        <span class="keyword">on</span> S.depart_name = T.depart_name</span><br><span class="line"></span><br><span class="line">    &lt;/<span class="keyword">select</span>&gt;</span><br></pre></td></tr></table></figure>
+
+
+                <hr>
+
+                
+
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2020/10/15/我的博客开通了/" data-toggle="tooltip" data-placement="top" title="我的博客开通了">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+            </div>
+    <!-- Side Catalog Container -->
+        
+
+    <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#数据库" title="数据库">数据库</a>
+                        
+                          <a class="tag" href="/tags/#postger" title="postger">postger</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="#" target="_blank">并未开通</a></li>
+                    
+                        <li><a href="#" target="_blank">并未开通</a></li>
+                    
+                        <li><a href="#" target="_blank">Foo</a></li>
+                    
+                        <li><a href="#" target="_blank">Bar</a></li>
+                    
+                        <li><a href="#" target="_blank">Example Friends</a></li>
+                    
+                        <li><a href="#" target="_blank">It helps SEO</a></li>
+                    
+                </ul>
+                
+            </div>
+
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "hexo-theme-huxblog";
+    var disqus_identifier = "https://zhanghangwei-git.github.io/2020/10/19/postgreSQL/";
+    var disqus_url = "https://zhanghangwei-git.github.io/2020/10/19/postgreSQL/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+	
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/Demonbane_x">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/Demonbane">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/Demonbane">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/demonbane.cn">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/Kaijun">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://www.linkedin.com/in/kaijun-chen-42089354">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Hades Blog 2020 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    Ported by <a href="http://blog.kaijun.rocks">Kaijun</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=kaijun&repo=hexo-theme-huxblog&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://zhanghangwei-git.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-49627206-1';
+    var _gaDomain = 'huangxuan.me';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = '4cc1f2d8f3067386cc5cdb626a202900';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- Side Catalog -->
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="https://zhanghangwei-git.github.io/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
