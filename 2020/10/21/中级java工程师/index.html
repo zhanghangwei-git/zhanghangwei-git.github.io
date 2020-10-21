@@ -95,14 +95,14 @@
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
@@ -197,19 +197,16 @@
                 post-container">
 
                 <h1 id="Java成神之路"><a href="#Java成神之路" class="headerlink" title="Java成神之路"></a>Java成神之路</h1><p><img src="D:\hexo-theme-huxblog\source\_posts\中级java工程师\微信图片_20201021153529.jpg" alt></p>
-<p>1.string类的常用方法有哪些?</p>
-<blockquote>
+<h4 id="1-string类的常用方法有哪些"><a href="#1-string类的常用方法有哪些" class="headerlink" title="1.string类的常用方法有哪些?"></a>1.string类的常用方法有哪些?</h4><blockquote>
 <p>答：<a href="https://zhidao.baidu.com/question/232452768.html" target="_blank" rel="noopener">https://zhidao.baidu.com/question/232452768.html</a></p>
 </blockquote>
-<p>2.String,StringBuffer,StringBuilder的区别。</p>
-<blockquote>
+<h4 id="2-String-StringBuffer-StringBuilder的区别。"><a href="#2-String-StringBuffer-StringBuilder的区别。" class="headerlink" title="2.String,StringBuffer,StringBuilder的区别。"></a>2.String,StringBuffer,StringBuilder的区别。</h4><blockquote>
 <p>答：1）如果操作少量的数据用String（查看源码得知，String类的声明是：public final，改变它的值相当于创建一个新的字符串）</p>
 <p>​    2）单线程下操作大量的数据用StringBuilder</p>
 <p>​    3）多线程下操作大量的数据用StringBuffer</p>
 <p><a href="https://www.cnblogs.com/A_ming/archive/2010/04/13/1711395.html" target="_blank" rel="noopener">https://www.cnblogs.com/A_ming/archive/2010/04/13/1711395.html</a></p>
 </blockquote>
-<p>3，String str = new String(“xyz”);创建了几个对象。</p>
-<blockquote>
+<h4 id="3，String-str-new-String-“xyz”-创建了几个对象。"><a href="#3，String-str-new-String-“xyz”-创建了几个对象。" class="headerlink" title="3，String str = new String(“xyz”);创建了几个对象。"></a>3，String str = new String(“xyz”);创建了几个对象。</h4><blockquote>
 <p>答：两个</p>
 <p>延伸： </p>
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; String <span class="attribute">s1</span>=<span class="string">"a"</span>;</span><br><span class="line">&gt; String <span class="attribute">s2</span>=<span class="string">"a"</span>;</span><br><span class="line">&gt; System.out.<span class="builtin-name">print</span>(<span class="attribute">s1</span>==s2);</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
@@ -218,16 +215,14 @@
 <p>输出是True</p>
 <p>因为：原因是Java为了避免产生大量的String对象，设计了一个字符串常量池。工作原理是这样的，创建一个字符串时，JVM首先为检查字符串常量池中是否有值相等的字符串，如果有，则不再创建，直接返回该字符串的引用地址，若没有，则创建，然后放到字符串常量池中，并返回新创建的字符串的引用地址。</p>
 </blockquote>
-<p>4，说几个你常见到的异常。</p>
-<blockquote>
+<h4 id="4，说几个你常见到的异常。"><a href="#4，说几个你常见到的异常。" class="headerlink" title="4，说几个你常见到的异常。"></a>4，说几个你常见到的异常。</h4><blockquote>
 <p>答：</p>
 <p>空指针异常：NullPointerException</p>
 <p> 数组下表越界异常：ArrayIndexOutOfBoundsException</p>
 <p>内存不足错误：java.lang.OutOfMemoryError</p>
 <p>字符串转换为数字异常：NumberFormatException</p>
 </blockquote>
-<p>5，hashtable和hashmap的区别是什么？</p>
-<blockquote>
+<h4 id="5，hashtable和hashmap的区别是什么？"><a href="#5，hashtable和hashmap的区别是什么？" class="headerlink" title="5，hashtable和hashmap的区别是什么？"></a>5，hashtable和hashmap的区别是什么？</h4><blockquote>
 <p>答;</p>
 <p>  1)、继承的父类不同</p>
 <p>   Hashtable继承自Dictionary类，而HashMap继承自AbstractMap类。但二者都实现了Map接口。</p>
@@ -252,7 +247,7 @@
 <ul>
 <li>2，HashMap计算hash对key的hashcode进行了二次hash，以获得更好的散列值，然后对table数组长度取摸：</li>
 </ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash"> static int <span class="built_in">hash</span>(int h) &#123;</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">      h ^= (h &gt;&gt;&gt; 20) ^ (h &gt;&gt;&gt; 12);</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">      <span class="built_in">return</span> h ^ (h &gt;&gt;&gt; 7) ^ (h &gt;&gt;&gt; 4);</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">  &#125;</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">  </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> static int indexFor(int h, int length) &#123;</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">      <span class="built_in">return</span> h &amp; (length-1);</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">  &#125;</span></span><br><span class="line"><span class="meta">&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash"> static int <span class="built_in">hash</span>(int h) &#123;</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">      h ^= (h &gt;&gt;&gt; 20) ^ (h &gt;&gt;&gt; 12);</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">      <span class="built_in">return</span> h ^ (h &gt;&gt;&gt; 7) ^ (h &gt;&gt;&gt; 4);</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">  &#125;</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> static int indexFor(int h, int length) &#123;</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">      <span class="built_in">return</span> h &amp; (length-1);</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">  &#125;</span></span><br><span class="line"><span class="meta">&gt;</span></span><br></pre></td></tr></table></figure>
 </blockquote>
 <blockquote>
 <p>）</p>
@@ -264,12 +259,10 @@
 <p>   Hashtable和HashMap它们两个内部实现方式的数组的初始大小和扩容的方式。HashTable中hash数组默认大小是11，增加的方式是 old*2+1。</p>
 <p><a href="https://blog.csdn.net/fujiakai/article/details/51585767" target="_blank" rel="noopener">https://blog.csdn.net/fujiakai/article/details/51585767</a></p>
 </blockquote>
-<p>6.hashmap的底层实现方式是什么？</p>
-<blockquote>
+<h4 id="6-hashmap的底层实现方式是什么？"><a href="#6-hashmap的底层实现方式是什么？" class="headerlink" title="6.hashmap的底层实现方式是什么？"></a>6.hashmap的底层实现方式是什么？</h4><blockquote>
 <p>HashMap的底层通过位桶实现，位桶里面存的是链表（1.7以前）或者红黑树（有序，1.8开始） ，其实就是数组加链表（或者红黑树）的格式，通过判断hashCode定位位桶中的下标，通过equals定位目标值在链表中的位置，所以如果你使用的key使用可变类（非final修饰的类），那么你在自定义hashCode和equals的时候一定要注意要满足：如果两个对象equals那么一定要hashCode相同，如果是hashCode相同的话不一定要求equals！所以一般来说不要自定义hashCode和equls，推荐使用不可变类对象做key，比如Integer、String等等。</p>
 </blockquote>
-<p>7.Vector 和 ArrayList 的区别？</p>
-<blockquote>
+<h4 id="7-Vector-和-ArrayList-的区别？"><a href="#7-Vector-和-ArrayList-的区别？" class="headerlink" title="7.Vector 和 ArrayList 的区别？"></a>7.Vector 和 ArrayList 的区别？</h4><blockquote>
 <p>这两个类都实现了List接口（List接口继承了<a href="https://www.baidu.com/s?wd=Collection接口&amp;tn=44039180_cpr&amp;fenlei=mv6quAkxTZn0IZRqIHckPjm4nH00T1dWPADYuH7bnAFhuj79n1Rd0ZwV5Hcvrjm3rH6sPfKWUMw85HfYnjn4nH6sgvPsT6KdThsqpZwYTjCEQLGCpyw9Uz4Bmy-bIi4WUvYETgN-TLwGUv3EPH0krH6dP1DY" target="_blank" rel="noopener">Collection接口</a>），他们都是有序集合，即存储在这两个集合中的元素的位置都是有顺序的，相当于一种动态的数组，我们以后可以按位置索引号取出某个元素，，并且其中的数据是允许重复的，这是HashSet之类的集合的最大不同处，HashSet之类的集合不可以按索引号去检索其中的元素，也不允许有重复的元素（本来题目问的与hashset没有任何关系，但为了说清楚ArrayList与Vector的功能，我们使用对比方式，更有利于说明问题）。</p>
 <p>ArrayList与Vector的区别，这主要包括两个方面：. （1）同步性：</p>
 <p>Vector是<a href="https://www.baidu.com/s?wd=线程安全&amp;tn=44039180_cpr&amp;fenlei=mv6quAkxTZn0IZRqIHckPjm4nH00T1dWPADYuH7bnAFhuj79n1Rd0ZwV5Hcvrjm3rH6sPfKWUMw85HfYnjn4nH6sgvPsT6KdThsqpZwYTjCEQLGCpyw9Uz4Bmy-bIi4WUvYETgN-TLwGUv3EPH0krH6dP1DY" target="_blank" rel="noopener">线程安全</a>的，也就是说是它的方法之间是<a href="https://www.baidu.com/s?wd=线程同步&amp;tn=44039180_cpr&amp;fenlei=mv6quAkxTZn0IZRqIHckPjm4nH00T1dWPADYuH7bnAFhuj79n1Rd0ZwV5Hcvrjm3rH6sPfKWUMw85HfYnjn4nH6sgvPsT6KdThsqpZwYTjCEQLGCpyw9Uz4Bmy-bIi4WUvYETgN-TLwGUv3EPH0krH6dP1DY" target="_blank" rel="noopener">线程同步</a>的，而ArrayList是线程序不安全的，它的方法之间是线程不同步的。如果只有一个线程会访问到集合，那最好是使用ArrayList，因为它不考虑<a href="https://www.baidu.com/s?wd=线程安全&amp;tn=44039180_cpr&amp;fenlei=mv6quAkxTZn0IZRqIHckPjm4nH00T1dWPADYuH7bnAFhuj79n1Rd0ZwV5Hcvrjm3rH6sPfKWUMw85HfYnjn4nH6sgvPsT6KdThsqpZwYTjCEQLGCpyw9Uz4Bmy-bIi4WUvYETgN-TLwGUv3EPH0krH6dP1DY" target="_blank" rel="noopener">线程安全</a>，效率会高些；如果有多个线程会访问到集合，那最好是使用Vector，因为不需要我们自己再去考虑和编写<a href="https://www.baidu.com/s?wd=线程安全&amp;tn=44039180_cpr&amp;fenlei=mv6quAkxTZn0IZRqIHckPjm4nH00T1dWPADYuH7bnAFhuj79n1Rd0ZwV5Hcvrjm3rH6sPfKWUMw85HfYnjn4nH6sgvPsT6KdThsqpZwYTjCEQLGCpyw9Uz4Bmy-bIi4WUvYETgN-TLwGUv3EPH0krH6dP1DY" target="_blank" rel="noopener">线程安全</a>的代码。</p>
@@ -277,8 +270,7 @@
 <p>ArrayList与Vector都有一个初始的容量大小，当存储进它们里面的元素的个数超过了容量时，就需要增加ArrayList与Vector的存储空间，每次要增加存储空间时，不是只增加一个存储单元，而是增加多个存储单元，每次增加的存储单元的个数在内存空间利用与程序效率之间要取得一定的平衡。Vector默认增长为原来两倍，而ArrayList的增长策略在文档中没有明确规定（从源代码看到的是增长为原来的1.5倍）。ArrayList与Vector都可以设置初始的空间大小，Vector还可以设置增长的空间大小，而ArrayList没有提供设置增长空间的方法。</p>
 <p>总结：即Vector增长原来的一倍，ArrayList增加原来的0.5倍。</p>
 </blockquote>
-<p>8.怎么遍历一个map？写一下。</p>
-<blockquote>
+<h4 id="8-怎么遍历一个map？写一下。"><a href="#8-怎么遍历一个map？写一下。" class="headerlink" title="8.怎么遍历一个map？写一下。"></a>8.怎么遍历一个map？写一下。</h4><blockquote>
 <p>1</p>
 <figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="keyword">for</span>(<span class="keyword">String</span> <span class="built_in">key</span> : <span class="built_in">map</span>.keySet())&#123;</span><br><span class="line">&gt;     System.out.<span class="built_in">println</span>(<span class="built_in">key</span>+<span class="string">" "</span>+<span class="built_in">map</span>.<span class="built_in">get</span>(<span class="built_in">key</span>)+<span class="string">""</span>);</span><br><span class="line">&gt; &#125;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
 </blockquote>
@@ -294,8 +286,7 @@
 <p>4:只遍历值</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash"> <span class="keyword">for</span>(String v:map.values())&#123;</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">     System.out.println(v+<span class="string">""</span>);</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> &#125;</span></span><br><span class="line"><span class="meta">&gt;</span></span><br></pre></td></tr></table></figure>
 </blockquote>
-<p>9.说一下list，set，map的区别。</p>
-<blockquote>
+<h4 id="9-说一下list，set，map的区别。"><a href="#9-说一下list，set，map的区别。" class="headerlink" title="9.说一下list，set，map的区别。"></a>9.说一下list，set，map的区别。</h4><blockquote>
 <p>List：1.可以允许重复的对象。</p>
 <p>　　  2.可以插入多个null元素。</p>
 <p>​    3.是一个有序容器，保持了每个元素的插入顺序，输出的顺序就是插入的顺序。</p>
@@ -321,8 +312,7 @@
 </ol>
 <p><a href="https://www.cnblogs.com/IvesHe/p/6108933.html" target="_blank" rel="noopener">https://www.cnblogs.com/IvesHe/p/6108933.html</a></p>
 </blockquote>
-<p>10.你的项目中用的是多线程还是单线程？</p>
-<p>11.多线程会遇到那些问题？怎么解决死锁？</p>
+<h4 id="10-你的项目中用的是多线程还是单线程？"><a href="#10-你的项目中用的是多线程还是单线程？" class="headerlink" title="10.你的项目中用的是多线程还是单线程？"></a>10.你的项目中用的是多线程还是单线程？</h4><p>11.多线程会遇到那些问题？怎么解决死锁？</p>
 <blockquote>
 <p>Java程序基本都要涉及到多线程，而在多线程环境中不可避免的要遇到线程死锁的问题。Java不像数据库那么能够检测到死锁，然后进行处理，Java中的死锁问题，只能通过程序员自己写代码时避免引入死锁的可能性来解决。</p>
 <p>产生死锁可能性的最根本原因是：<strong>线程在获得一个锁L1的情况下再去申请另外一个锁L2，也就是锁L1想要包含了锁L2，也就是说在获得了锁L1，并且没有释放锁L1的情况下，又去申请获得锁L2，这个是产生死锁的最根本原因</strong>。另一个原因是<strong>默认的锁申请操作是阻塞的</strong>。</p>
@@ -331,10 +321,8 @@
 <p>2，申请锁的减少交叉，按顺序申请</p>
 <p>3，死锁一般是会有一个死锁环，添加睡眠可以减少死锁环的概率</p>
 </blockquote>
-<p>12.用java写一个多线程程序，如写四个线程，二个加1，二个对一变量减一，输出：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> Other;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StudyThread</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> j = <span class="number">1</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">inc</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        j++;</span><br><span class="line">        System.out.println(Thread.currentThread().getName() + <span class="string">"-inc:"</span> + j);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">dec</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        j--;</span><br><span class="line">        System.out.println(Thread.currentThread().getName() + <span class="string">"-inc:"</span> + j);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Tinc</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            inc();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Tdec</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            dec();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123;</span><br><span class="line">        StudyThread studyThread = <span class="keyword">new</span> StudyThread();</span><br><span class="line">        Tinc t1 = studyThread.<span class="keyword">new</span> Tinc();</span><br><span class="line">        Tdec t11=studyThread.<span class="keyword">new</span> Tdec();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">2</span>;i++)&#123;</span><br><span class="line">            Thread thread=<span class="keyword">new</span> Thread(t1);</span><br><span class="line">            thread.start();</span><br><span class="line">            Thread thread1=<span class="keyword">new</span> Thread(t11);</span><br><span class="line">            thread1.start();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>13.至少说六点interface和abstract的区别。</p>
-<blockquote>
+<h4 id="12-用java写一个多线程程序，如写四个线程，二个加1，二个对一变量减一，输出："><a href="#12-用java写一个多线程程序，如写四个线程，二个加1，二个对一变量减一，输出：" class="headerlink" title="12.用java写一个多线程程序，如写四个线程，二个加1，二个对一变量减一，输出："></a>12.用java写一个多线程程序，如写四个线程，二个加1，二个对一变量减一，输出：</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> Other;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StudyThread</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> j = <span class="number">1</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">inc</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        j++;</span><br><span class="line">        System.out.println(Thread.currentThread().getName() + <span class="string">"-inc:"</span> + j);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">dec</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        j--;</span><br><span class="line">        System.out.println(Thread.currentThread().getName() + <span class="string">"-inc:"</span> + j);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Tinc</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            inc();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Tdec</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            dec();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123;</span><br><span class="line">        StudyThread studyThread = <span class="keyword">new</span> StudyThread();</span><br><span class="line">        Tinc t1 = studyThread.<span class="keyword">new</span> Tinc();</span><br><span class="line">        Tdec t11=studyThread.<span class="keyword">new</span> Tdec();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">2</span>;i++)&#123;</span><br><span class="line">            Thread thread=<span class="keyword">new</span> Thread(t1);</span><br><span class="line">            thread.start();</span><br><span class="line">            Thread thread1=<span class="keyword">new</span> Thread(t11);</span><br><span class="line">            thread1.start();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="13-至少说六点interface和abstract的区别。"><a href="#13-至少说六点interface和abstract的区别。" class="headerlink" title="13.至少说六点interface和abstract的区别。"></a>13.至少说六点interface和abstract的区别。</h4><blockquote>
 <p> <strong>1.相同点</strong><br>A. 两者都是抽象类，都不能实例化。<br>B. interface实现类及abstrctclass的子类都必须要实现已经声明的抽象方法。</p>
 <p><strong>2. 不同点</strong> </p>
 <p>A. interface需要实现，要用implements，而abstract class需要继承，要用extends。<br>B. 一个类可以实现多个interface，但一个类只能继承一个abstract class。<br>C. interface强调特定功能的实现，而abstractclass强调所属关系。<br>D. 尽管interface实现类及abstrct class的子类都必须要实现相应的抽象方法，但实现的形式不同。interface中的每一个方法都是抽象方法，都只是声明的(declaration,没有方法体)，实现类必须要实现。而abstractclass的子类可以有选择地实现。 </p>
@@ -343,16 +331,14 @@
 <p>1.abstract class 在 Java 语言中表示的是一种继承关系，一个类只能使用一次继承关系。但是，一个类却可以实现多个interface。</p>
 <p>　 　2.在abstract class 中可以有自己的数据成员，也可以有非abstarct的成员方法，而在interface中，只能够有静态的不能被修改的数据成员（也就是必须是static final的，不过在 interface中一般不定义数据成员），所有的成员方法都是abstract的。<br>　　 3.abstract class和interface所反映出的设计理念不同。其实abstract class表示的是”is-a”关系，interface表示的是”like-a”关系。<br>　　 4.实现抽象类和接口的类必须实现其中的所有方法。抽象类中可以有非<a href="https://www.baidu.com/s?wd=抽象方法&amp;tn=44039180_cpr&amp;fenlei=mv6quAkxTZn0IZRqIHckPjm4nH00T1dWPWK-nyNWPynLuHP9mH7-0ZwV5Hcvrjm3rH6sPfKWUMw85HfYnjn4nH6sgvPsT6KdThsqpZwYTjCEQLGCpyw9Uz4Bmy-bIi4WUvYETgN-TLwGUv3En1TznWfvn1c3P1fdPW61PW0Y" target="_blank" rel="noopener">抽象方法</a>。接口中则不能有实现方法。<br>　 　5.接口中定义的变量默认是public static final 型，且必须给其初值，所以实现类中不能重新定义，也不能改变其值。<br>　 　6.抽象类中的变量默认是 friendly 型，其值可以在子类中重新定义，也可以重新赋值。<br>　　 7.接口中的方法默认都是 public abstract 类型的。</p>
 </blockquote>
-<p>14.怎么把数组放到对象里面？</p>
-<blockquote>
+<h4 id="14-怎么把数组放到对象里面？"><a href="#14-怎么把数组放到对象里面？" class="headerlink" title="14.怎么把数组放到对象里面？"></a>14.怎么把数组放到对象里面？</h4><blockquote>
 <p>问题比较模糊</p>
 </blockquote>
 <p>15.给你一组字符串如：7i8hy4jjnb2.让你编程输出里面的数字：7842.</p>
 <figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">for (<span class="name">int</span> i = <span class="number">0</span><span class="comment">; i &lt; str.length(); i++) &#123;</span></span><br><span class="line">    if (<span class="name">Character</span>.isDigit(<span class="name">str</span>.charAt(<span class="name">i</span>))) &#123;</span><br><span class="line">        char c = str.charAt(<span class="name">i</span>)<span class="comment">;</span></span><br><span class="line">        System.out.print(<span class="name">c</span>)<span class="comment">;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>或：</p>
 <figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">String </span><span class="keyword">str1 </span>= <span class="keyword">str.replaceAll("[a-z]", </span><span class="string">""</span>)<span class="comment">;</span></span><br></pre></td></tr></table></figure>
-<p>16.多线程有几种实现方式？都是什么？同步有几种实现方式？都是什么？</p>
-<blockquote>
+<h4 id="16-多线程有几种实现方式？都是什么？同步有几种实现方式？都是什么？"><a href="#16-多线程有几种实现方式？都是什么？同步有几种实现方式？都是什么？" class="headerlink" title="16.多线程有几种实现方式？都是什么？同步有几种实现方式？都是什么？"></a>16.多线程有几种实现方式？都是什么？同步有几种实现方式？都是什么？</h4><blockquote>
 <p>Java多线程实现的三种方式：</p>
 <p>1,继承Thread类创建线程类:重写父类run( )方法</p>
 <figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">thread1</span> <span class="title">extends</span> <span class="title">Thread</span> &#123;</span></span><br><span class="line">&gt;     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">&gt;         <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10000</span>; i++) &#123;</span><br><span class="line">&gt;             System.out.<span class="built_in">println</span>(<span class="string">"线程一"</span>+i);</span><br><span class="line">&gt;         &#125;</span><br><span class="line">&gt;     &#125;</span><br><span class="line">&gt; </span><br><span class="line">&gt;     <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(<span class="keyword">String</span>[] args)</span> </span>&#123;</span><br><span class="line">&gt;         thread1 th1 = <span class="keyword">new</span> thread1();</span><br><span class="line">&gt;         thread1 th2 = <span class="keyword">new</span> thread1();</span><br><span class="line">&gt;         th1.<span class="built_in">run</span>();</span><br><span class="line">&gt;         th2.<span class="built_in">run</span>();</span><br><span class="line">&gt;     &#125;</span><br><span class="line">&gt; &#125;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
@@ -376,8 +362,7 @@
 <p>同步的实现方法有五种：1.同步方法；2.同步代码块；3.使用特殊域变量(volatile)实现<a href="https://www.baidu.com/s?wd=线程同步&amp;tn=44039180_cpr&amp;fenlei=mv6quAkxTZn0IZRqIHckPjm4nH00T1dBryRLuWDYnAFbuAckn1Dd0ZwV5Hcvrjm3rH6sPfKWUMw85HfYnjn4nH6sgvPsT6KdThsqpZwYTjCEQLGCpyw9Uz4Bmy-bIi4WUvYETgN-TLwGUv3EnHTvrH03njRsrHR4PjTkPWnsn0" target="_blank" rel="noopener">线程同步</a>；4.使用重入锁实现<a href="https://www.baidu.com/s?wd=线程同步&amp;tn=44039180_cpr&amp;fenlei=mv6quAkxTZn0IZRqIHckPjm4nH00T1dBryRLuWDYnAFbuAckn1Dd0ZwV5Hcvrjm3rH6sPfKWUMw85HfYnjn4nH6sgvPsT6KdThsqpZwYTjCEQLGCpyw9Uz4Bmy-bIi4WUvYETgN-TLwGUv3EnHTvrH03njRsrHR4PjTkPWnsn0" target="_blank" rel="noopener">线程同步</a>；5.使用局部变量实现<a href="https://www.baidu.com/s?wd=线程同步&amp;tn=44039180_cpr&amp;fenlei=mv6quAkxTZn0IZRqIHckPjm4nH00T1dBryRLuWDYnAFbuAckn1Dd0ZwV5Hcvrjm3rH6sPfKWUMw85HfYnjn4nH6sgvPsT6KdThsqpZwYTjCEQLGCpyw9Uz4Bmy-bIi4WUvYETgN-TLwGUv3EnHTvrH03njRsrHR4PjTkPWnsn0" target="_blank" rel="noopener">线程同步</a> 。</p>
 <p>其中<a href="https://www.baidu.com/s?wd=多线程&amp;tn=44039180_cpr&amp;fenlei=mv6quAkxTZn0IZRqIHckPjm4nH00T1dBryRLuWDYnAFbuAckn1Dd0ZwV5Hcvrjm3rH6sPfKWUMw85HfYnjn4nH6sgvPsT6KdThsqpZwYTjCEQLGCpyw9Uz4Bmy-bIi4WUvYETgN-TLwGUv3EnHTvrH03njRsrHR4PjTkPWnsn0" target="_blank" rel="noopener">多线程</a>实现过程中需注意重写或者覆盖run()方法，而对于同步的实现方法中使用较常使用的是利用synchronized编写同步方法和代码块。</p>
 </blockquote>
-<p> 17.java类实现序列化有几种实现方式？都是什么？（二种）不熟悉</p>
-<blockquote>
+<h4 id="17-java类实现序列化有几种实现方式？都是什么？（二种）不熟悉"><a href="#17-java类实现序列化有几种实现方式？都是什么？（二种）不熟悉" class="headerlink" title="17.java类实现序列化有几种实现方式？都是什么？（二种）不熟悉"></a>17.java类实现序列化有几种实现方式？都是什么？（二种）不熟悉</h4><blockquote>
 <p>Java对象的序列化有两种方式。</p>
 <p>a.是相应的对象实现了序列化接口Serializable，这个使用的比较多，对于序列化接口Serializable接口是一个空的接口，它的主要作用就是 标识这个对象时可序列化的，jre对象在传输对象的时候会进行相关的封装。这里就不做过多的介绍了。</p>
 <p>b.实现序列化的第二种方式为实现接口Externalizable</p>
@@ -385,12 +370,10 @@
 <p>2.也是最应该注意的，如果你先序列化对象A后序列化B，那么在反序列化的时候一定记着JAVA规定先读到的对象 是先被序列化的对象，不要先接收对象B，那样会报错.尤其在使用上面的Externalizable的时候一定要注意读取 的先后顺序。 3.实现序列化接口的对象并不强制声明唯一的serialVersionUID，是否声明serialVersionUID对于对象序列化的向 上向下的兼容性有很大的影响。,</p>
 <p><a href="https://blog.csdn.net/u012554102/article/details/51902697" target="_blank" rel="noopener">https://blog.csdn.net/u012554102/article/details/51902697</a></p>
 </blockquote>
-<p>18.java开发中“==” 和 “equals” 有何区别？</p>
-<blockquote>
+<h4 id="18-java开发中“-”-和-“equals”-有何区别？"><a href="#18-java开发中“-”-和-“equals”-有何区别？" class="headerlink" title="18.java开发中“==” 和 “equals” 有何区别？"></a>18.java开发中“==” 和 “equals” 有何区别？</h4><blockquote>
 <p>==判断的是两个字符串地址是否相同<br>.equals才是比较字符串内容</p>
 </blockquote>
-<p>19.static局部变量与全局变量的区别，编译后映射文件是否包含此类变量的地址。</p>
-<blockquote>
+<h4 id="19-static局部变量与全局变量的区别，编译后映射文件是否包含此类变量的地址。"><a href="#19-static局部变量与全局变量的区别，编译后映射文件是否包含此类变量的地址。" class="headerlink" title="19.static局部变量与全局变量的区别，编译后映射文件是否包含此类变量的地址。"></a>19.static局部变量与全局变量的区别，编译后映射文件是否包含此类变量的地址。</h4><blockquote>
 <p>改问题：static全局变量与普通的全局变量有什么区别？</p>
 <p>​       static局部变量和普通局部变量有什么区别？</p>
 <p>​       static函数与普通函数有什么区别？ 　　</p>
@@ -401,17 +384,14 @@
 <p><a href="https://blog.csdn.net/u012497906/article/details/48522715" target="_blank" rel="noopener">https://blog.csdn.net/u012497906/article/details/48522715</a></p>
 <p><a href="https://www.cnblogs.com/michaelShao/p/6698504.html" target="_blank" rel="noopener">https://www.cnblogs.com/michaelShao/p/6698504.html</a></p>
 </blockquote>
-<p>20.在日常工作中，使用过哪些 java core 包，遇到java core 的那些异常？（可以写中文）</p>
-<blockquote>
+<h4 id="20-在日常工作中，使用过哪些-java-core-包，遇到java-core-的那些异常？（可以写中文）"><a href="#20-在日常工作中，使用过哪些-java-core-包，遇到java-core-的那些异常？（可以写中文）" class="headerlink" title="20.在日常工作中，使用过哪些 java core 包，遇到java core 的那些异常？（可以写中文）"></a>20.在日常工作中，使用过哪些 java core 包，遇到java core 的那些异常？（可以写中文）</h4><blockquote>
 <p>JAVA分为J2SE， <a href="https://www.baidu.com/s?wd=J2EE&amp;from=1012015a&amp;fenlei=mv6quAkxTZn0IZRqIHckPjm4nH00T1dBrjRYPHFbPj-BuAm3rH040ZwV5Hcvrjm3rH6sPfKWUMw85HfYnjn4nH6sgvPsT6KdThsqpZwYTjCEQLGCpyw9Uz4Bmy-bIi4WUvYETgN-TLwGUv3En1RdnHDkr0" target="_blank" rel="noopener">J2EE</a> ，<a href="https://www.baidu.com/s?wd=J2ME&amp;from=1012015a&amp;fenlei=mv6quAkxTZn0IZRqIHckPjm4nH00T1dBrjRYPHFbPj-BuAm3rH040ZwV5Hcvrjm3rH6sPfKWUMw85HfYnjn4nH6sgvPsT6KdThsqpZwYTjCEQLGCpyw9Uz4Bmy-bIi4WUvYETgN-TLwGUv3En1RdnHDkr0" target="_blank" rel="noopener">J2ME</a>三个版本</p>
 <p>其中J2SE包括Core JAVA和Desktop JAVA<br>Core JA<img src="https://static.oschina.net/uploads/img/201804/16144310_vWkq.png" alt="搜索">VA主要是<a href="https://www.baidu.com/s?wd=JAVA语言&amp;from=1012015a&amp;fenlei=mv6quAkxTZn0IZRqIHckPjm4nH00T1dBrjRYPHFbPj-BuAm3rH040ZwV5Hcvrjm3rH6sPfKWUMw85HfYnjn4nH6sgvPsT6KdThsqpZwYTjCEQLGCpyw9Uz4Bmy-bIi4WUvYETgN-TLwGUv3En1RdnHDkr0" target="_blank" rel="noopener">JAVA语言</a>方面的内容<br>Desktop JAVA主要是JAVA的桌面应用方面的内容</p>
 </blockquote>
-<p>21.在servlet中怎么获取页面传过来的 name=”a” 或者 id=”b” 的<input>输入框的值？</p>
-<blockquote>
+<h4 id="21-在servlet中怎么获取页面传过来的-name-”a”-或者-id-”b”-的输入框的值？"><a href="#21-在servlet中怎么获取页面传过来的-name-”a”-或者-id-”b”-的输入框的值？" class="headerlink" title="21.在servlet中怎么获取页面传过来的 name=”a” 或者 id=”b” 的输入框的值？"></a>21.在servlet中怎么获取页面传过来的 name=”a” 或者 id=”b” 的<input>输入框的值？</h4><blockquote>
 <p>在servlet中获取请求中的表单值，是通过request.getParameter(“参数时input标签的name”);<br>在jsp页面上获取一个input标签的值，那就用document.getElementById().value;或者document.getElementsByName().value;</p>
 </blockquote>
-<p>22.jsp和servlet有哪些相同点和不同点，他们之间的联系是什么？为什么要用jsp做显示而不用servlet？</p>
-<blockquote>
+<h4 id="22-jsp和servlet有哪些相同点和不同点，他们之间的联系是什么？为什么要用jsp做显示而不用servlet？"><a href="#22-jsp和servlet有哪些相同点和不同点，他们之间的联系是什么？为什么要用jsp做显示而不用servlet？" class="headerlink" title="22.jsp和servlet有哪些相同点和不同点，他们之间的联系是什么？为什么要用jsp做显示而不用servlet？"></a>22.jsp和servlet有哪些相同点和不同点，他们之间的联系是什么？为什么要用jsp做显示而不用servlet？</h4><blockquote>
 <p>jsp及Servlet经典面试题以及答案:这个问题更全</p>
 <p><a href="https://blog.csdn.net/u013842976/article/details/52275344" target="_blank" rel="noopener">https://blog.csdn.net/u013842976/article/details/52275344</a></p>
 </blockquote>
@@ -420,17 +400,14 @@
 <p>1，session 在服务器端，cookie 在客户端（浏览器）<br>2，session 默认被存在在服务器的一个文件里（不是内存）<br>3，session 的运行依赖 session id，而 session id 是存在 cookie 中的，也就是说，如果浏览器禁用了 cookie ，同时 session 也会失效（但是可以通过其它方式实现，比如在 url 中传递 session_id）<br>4，session 可以放在 文件、数据库、或内存中都可以。<br>5，用户验证这种场合一般会用 session</p>
 <p>因此，维持一个会话的核心就是客户端的唯一标识，即 session id</p>
 </blockquote>
-<p>23.说一下servlet的生命周期，在执行servlet的过程中分别执行了哪些方法？每个方法具体负责什么？可以实现一些什么内容？</p>
-<blockquote>
+<h4 id="23-说一下servlet的生命周期，在执行servlet的过程中分别执行了哪些方法？每个方法具体负责什么？可以实现一些什么内容？"><a href="#23-说一下servlet的生命周期，在执行servlet的过程中分别执行了哪些方法？每个方法具体负责什么？可以实现一些什么内容？" class="headerlink" title="23.说一下servlet的生命周期，在执行servlet的过程中分别执行了哪些方法？每个方法具体负责什么？可以实现一些什么内容？"></a>23.说一下servlet的生命周期，在执行servlet的过程中分别执行了哪些方法？每个方法具体负责什么？可以实现一些什么内容？</h4><blockquote>
 <p><a href="https://blog.csdn.net/javaloveiphone/article/details/8154791" target="_blank" rel="noopener">https://blog.csdn.net/javaloveiphone/article/details/8154791</a></p>
 </blockquote>
-<p>24，你知道easyUI吗？</p>
-<blockquote>
+<h4 id="24，你知道easyUI吗？"><a href="#24，你知道easyUI吗？" class="headerlink" title="24，你知道easyUI吗？"></a>24，你知道easyUI吗？</h4><blockquote>
 <p>jQuery EasyUI是一组基于jQuery的UI插件集合体，而jQuery EasyUI的目标就是帮助web开发者更轻松的打造出功能丰富并且美观的UI界面。开发者不需要编写复杂的javascript，也不需要对css样式有深入的了解，开发者需要了解的只有一些简单的html标签。</p>
 <p><a href="https://baike.baidu.com/item/jQueryEasyUI/1733327?fr=aladdin" target="_blank" rel="noopener">https://baike.baidu.com/item/jQueryEasyUI/1733327?fr=aladdin</a></p>
 </blockquote>
-<p>25.<div><span>1</span><span>2</span><span>3</span></div>如何获取第二个span的值？</p>
-<blockquote>
+<h4 id="25-123如何获取第二个span的值？"><a href="#25-123如何获取第二个span的值？" class="headerlink" title="25.123如何获取第二个span的值？"></a>25.<div><span>1</span><span>2</span><span>3</span></div>如何获取第二个span的值？</h4><blockquote>
 <p>简单</p>
 </blockquote>
 <p>26.用js或者jquery获取页面上name=”a” 或者 id=”b” <input>输入框的值.</p>
@@ -441,6 +418,10 @@
                 
 
                 <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2020/10/21/代码笔记/" data-toggle="tooltip" data-placement="top" title="代码笔记">&larr; Previous Post</a>
+                        </li>
                     
                     
                         <li class="next">
