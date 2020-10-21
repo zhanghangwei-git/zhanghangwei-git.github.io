@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content>
+    <meta name="keyword" content>
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+          Java成神之路 - Hades的博客 | hades Blog
+        
+    </title>
+
+    <link rel="canonical" href="https://zhanghangwei-git.github.io/2020/10/19/中级java工程师/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+	
+	
+
+
+
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Hades Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archives/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    
+<!-- Image to hack wechat -->
+<!-- <img src="https://zhanghangwei-git.github.io/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#面试题Java成神之路" title="面试题Java成神之路">面试题Java成神之路</a>
+                        
+                    </div>
+                    <h1>Java成神之路</h1>
+                    <h2 class="subheading">Java全站开发</h2>
+                    <span class="meta">
+                        Posted by Hades on
+                        2020-10-19
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h1 id="Java成神之路"><a href="#Java成神之路" class="headerlink" title="Java成神之路"></a>Java成神之路</h1><p><img src="D:\hexo-theme-huxblog\source\_posts\中级java工程师\微信图片_20201021153529.jpg" alt></p>
+<p>1.string类的常用方法有哪些?</p>
+<blockquote>
+<p>答：<a href="https://zhidao.baidu.com/question/232452768.html" target="_blank" rel="noopener">https://zhidao.baidu.com/question/232452768.html</a></p>
+</blockquote>
+<p>2.String,StringBuffer,StringBuilder的区别。</p>
+<blockquote>
+<p>答：1）如果操作少量的数据用String（查看源码得知，String类的声明是：public final，改变它的值相当于创建一个新的字符串）</p>
+<p>​    2）单线程下操作大量的数据用StringBuilder</p>
+<p>​    3）多线程下操作大量的数据用StringBuffer</p>
+<p><a href="https://www.cnblogs.com/A_ming/archive/2010/04/13/1711395.html" target="_blank" rel="noopener">https://www.cnblogs.com/A_ming/archive/2010/04/13/1711395.html</a></p>
+</blockquote>
+<p>3，String str = new String(“xyz”);创建了几个对象。</p>
+<blockquote>
+<p>答：两个</p>
+<p>延伸： </p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; String <span class="attribute">s1</span>=<span class="string">"a"</span>;</span><br><span class="line">&gt; String <span class="attribute">s2</span>=<span class="string">"a"</span>;</span><br><span class="line">&gt; System.out.<span class="builtin-name">print</span>(<span class="attribute">s1</span>==s2);</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>输出是True</p>
+<p>因为：原因是Java为了避免产生大量的String对象，设计了一个字符串常量池。工作原理是这样的，创建一个字符串时，JVM首先为检查字符串常量池中是否有值相等的字符串，如果有，则不再创建，直接返回该字符串的引用地址，若没有，则创建，然后放到字符串常量池中，并返回新创建的字符串的引用地址。</p>
+</blockquote>
+<p>4，说几个你常见到的异常。</p>
+<blockquote>
+<p>答：</p>
+<p>空指针异常：NullPointerException</p>
+<p> 数组下表越界异常：ArrayIndexOutOfBoundsException</p>
+<p>内存不足错误：java.lang.OutOfMemoryError</p>
+<p>字符串转换为数字异常：NumberFormatException</p>
+</blockquote>
+<p>5，hashtable和hashmap的区别是什么？</p>
+<blockquote>
+<p>答;</p>
+<p>  1)、继承的父类不同</p>
+<p>   Hashtable继承自Dictionary类，而HashMap继承自AbstractMap类。但二者都实现了Map接口。</p>
+<p>   2)、线程安全性不同</p>
+<p>   javadoc中关于hashmap的一段描述如下：此实现不是同步的。如果多个线程同时访问一个哈希映射，而其中至少一个线程从结构上修改了该映射，则它必须保持外部同步</p>
+<p>   Hashtable 中的方法是Synchronize的</p>
+<p> 3)、是否提供contains方法</p>
+<p>   HashMap把Hashtable的contains方法去掉了，改成containsValue和containsKey，因为contains方法容易让人引起误解。</p>
+<p>   Hashtable则保留了contains，containsValue和containsKey三个方法，其中contains和containsValue功能相同。</p>
+<p> 4)、key和value是否允许null值</p>
+<p>   Hashtable中，key和value都不允许出现null值。但是如果在Hashtable中有类似put(null,null)的操作，编译同样可以通过，因为key和value都是Object类型，但运行时会抛出NullPointerException异常，这是JDK的规范规定的。<br>HashMap中，null可以作为键，这样的键只有一个；可以有一个或多个键所对应的值为null。当get()方法返回null值时，可能是 HashMap中没有该键，也可能使该键所对应的值为null。因此，在HashMap中不能由get()方法来判断HashMap中是否存在某个键， 而应该用containsKey()方法来判断。</p>
+<p> 5)、两个遍历方式的内部实现上不同</p>
+<p>   Hashtable、HashMap都使用了 Iterator。而由于历史原因，Hashtable还使用了Enumeration的方式 </p>
+<p>  6)、hash值不同</p>
+<p>（另一种解释：</p>
+<ol>
+<li>Hashtable计算hash是直接使用key的hashcode对table数组的长度直接进行取模：</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash"> int <span class="built_in">hash</span> = key.hashCode();</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> int index = (<span class="built_in">hash</span> &amp; 0x7FFFFFFF) % tab.length;</span></span><br><span class="line"><span class="meta">&gt;</span></span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<ul>
+<li>2，HashMap计算hash对key的hashcode进行了二次hash，以获得更好的散列值，然后对table数组长度取摸：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash"> static int <span class="built_in">hash</span>(int h) &#123;</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">      h ^= (h &gt;&gt;&gt; 20) ^ (h &gt;&gt;&gt; 12);</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">      <span class="built_in">return</span> h ^ (h &gt;&gt;&gt; 7) ^ (h &gt;&gt;&gt; 4);</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">  &#125;</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">  </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> static int indexFor(int h, int length) &#123;</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">      <span class="built_in">return</span> h &amp; (length-1);</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">  &#125;</span></span><br><span class="line"><span class="meta">&gt;</span></span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>）</p>
+<p>   哈希值的使用不同，HashTable直接使用对象的hashCode。而HashMap重新计算hash值。</p>
+<p>   hashCode是jdk根据对象的地址或者字符串或者数字算出来的int类型的数值。</p>
+<p>   Hashtable计算hash值，直接用key的hashCode()，而HashMap重新计算了key的hash值，Hashtable在求hash值对应的位置索引时，用取模运算，而HashMap在求位置索引时，则用与运算，且这里一般先用hash&amp;0x7FFFFFFF后，再对length取模，&amp;0x7FFFFFFF的目的是为了将负的hash值转化为正值，因为hash值有可能为负数，而&amp;0x7FFFFFFF后，只有符号外改变，而后面的位都不变。</p>
+<p>   7)、内部实现使用的数组初始化和扩容方式不同</p>
+<p>   HashTable在不指定容量的情况下的默认容量为11，而HashMap为16，Hashtable不要求底层数组的容量一定要为2的整数次幂，而HashMap则要求一定为2的整数次幂。<br>   Hashtable扩容时，将容量变为原来的2倍加1，而HashMap扩容时，将容量变为原来的2倍。</p>
+<p>   Hashtable和HashMap它们两个内部实现方式的数组的初始大小和扩容的方式。HashTable中hash数组默认大小是11，增加的方式是 old*2+1。</p>
+<p><a href="https://blog.csdn.net/fujiakai/article/details/51585767" target="_blank" rel="noopener">https://blog.csdn.net/fujiakai/article/details/51585767</a></p>
+</blockquote>
+<p>6.hashmap的底层实现方式是什么？</p>
+<blockquote>
+<p>HashMap的底层通过位桶实现，位桶里面存的是链表（1.7以前）或者红黑树（有序，1.8开始） ，其实就是数组加链表（或者红黑树）的格式，通过判断hashCode定位位桶中的下标，通过equals定位目标值在链表中的位置，所以如果你使用的key使用可变类（非final修饰的类），那么你在自定义hashCode和equals的时候一定要注意要满足：如果两个对象equals那么一定要hashCode相同，如果是hashCode相同的话不一定要求equals！所以一般来说不要自定义hashCode和equls，推荐使用不可变类对象做key，比如Integer、String等等。</p>
+</blockquote>
+<p>7.Vector 和 ArrayList 的区别？</p>
+<blockquote>
+<p>这两个类都实现了List接口（List接口继承了<a href="https://www.baidu.com/s?wd=Collection接口&amp;tn=44039180_cpr&amp;fenlei=mv6quAkxTZn0IZRqIHckPjm4nH00T1dWPADYuH7bnAFhuj79n1Rd0ZwV5Hcvrjm3rH6sPfKWUMw85HfYnjn4nH6sgvPsT6KdThsqpZwYTjCEQLGCpyw9Uz4Bmy-bIi4WUvYETgN-TLwGUv3EPH0krH6dP1DY" target="_blank" rel="noopener">Collection接口</a>），他们都是有序集合，即存储在这两个集合中的元素的位置都是有顺序的，相当于一种动态的数组，我们以后可以按位置索引号取出某个元素，，并且其中的数据是允许重复的，这是HashSet之类的集合的最大不同处，HashSet之类的集合不可以按索引号去检索其中的元素，也不允许有重复的元素（本来题目问的与hashset没有任何关系，但为了说清楚ArrayList与Vector的功能，我们使用对比方式，更有利于说明问题）。</p>
+<p>ArrayList与Vector的区别，这主要包括两个方面：. （1）同步性：</p>
+<p>Vector是<a href="https://www.baidu.com/s?wd=线程安全&amp;tn=44039180_cpr&amp;fenlei=mv6quAkxTZn0IZRqIHckPjm4nH00T1dWPADYuH7bnAFhuj79n1Rd0ZwV5Hcvrjm3rH6sPfKWUMw85HfYnjn4nH6sgvPsT6KdThsqpZwYTjCEQLGCpyw9Uz4Bmy-bIi4WUvYETgN-TLwGUv3EPH0krH6dP1DY" target="_blank" rel="noopener">线程安全</a>的，也就是说是它的方法之间是<a href="https://www.baidu.com/s?wd=线程同步&amp;tn=44039180_cpr&amp;fenlei=mv6quAkxTZn0IZRqIHckPjm4nH00T1dWPADYuH7bnAFhuj79n1Rd0ZwV5Hcvrjm3rH6sPfKWUMw85HfYnjn4nH6sgvPsT6KdThsqpZwYTjCEQLGCpyw9Uz4Bmy-bIi4WUvYETgN-TLwGUv3EPH0krH6dP1DY" target="_blank" rel="noopener">线程同步</a>的，而ArrayList是线程序不安全的，它的方法之间是线程不同步的。如果只有一个线程会访问到集合，那最好是使用ArrayList，因为它不考虑<a href="https://www.baidu.com/s?wd=线程安全&amp;tn=44039180_cpr&amp;fenlei=mv6quAkxTZn0IZRqIHckPjm4nH00T1dWPADYuH7bnAFhuj79n1Rd0ZwV5Hcvrjm3rH6sPfKWUMw85HfYnjn4nH6sgvPsT6KdThsqpZwYTjCEQLGCpyw9Uz4Bmy-bIi4WUvYETgN-TLwGUv3EPH0krH6dP1DY" target="_blank" rel="noopener">线程安全</a>，效率会高些；如果有多个线程会访问到集合，那最好是使用Vector，因为不需要我们自己再去考虑和编写<a href="https://www.baidu.com/s?wd=线程安全&amp;tn=44039180_cpr&amp;fenlei=mv6quAkxTZn0IZRqIHckPjm4nH00T1dWPADYuH7bnAFhuj79n1Rd0ZwV5Hcvrjm3rH6sPfKWUMw85HfYnjn4nH6sgvPsT6KdThsqpZwYTjCEQLGCpyw9Uz4Bmy-bIi4WUvYETgN-TLwGUv3EPH0krH6dP1DY" target="_blank" rel="noopener">线程安全</a>的代码。</p>
+<p>备注：对于Vector&amp;ArrayList、Hashtable&amp;HashMap，要记住线程安全的问题，记住Vector与Hashtable是旧的，是java一诞生就提供了的，它们是线程安全的，ArrayList与HashMap是<a href="https://www.baidu.com/s?wd=java2&amp;tn=44039180_cpr&amp;fenlei=mv6quAkxTZn0IZRqIHckPjm4nH00T1dWPADYuH7bnAFhuj79n1Rd0ZwV5Hcvrjm3rH6sPfKWUMw85HfYnjn4nH6sgvPsT6KdThsqpZwYTjCEQLGCpyw9Uz4Bmy-bIi4WUvYETgN-TLwGUv3EPH0krH6dP1DY" target="_blank" rel="noopener">java2</a>时才提供的，它们是线程不安全的。所以，我们讲课时先讲老的。（2）数据增长：</p>
+<p>ArrayList与Vector都有一个初始的容量大小，当存储进它们里面的元素的个数超过了容量时，就需要增加ArrayList与Vector的存储空间，每次要增加存储空间时，不是只增加一个存储单元，而是增加多个存储单元，每次增加的存储单元的个数在内存空间利用与程序效率之间要取得一定的平衡。Vector默认增长为原来两倍，而ArrayList的增长策略在文档中没有明确规定（从源代码看到的是增长为原来的1.5倍）。ArrayList与Vector都可以设置初始的空间大小，Vector还可以设置增长的空间大小，而ArrayList没有提供设置增长空间的方法。</p>
+<p>总结：即Vector增长原来的一倍，ArrayList增加原来的0.5倍。</p>
+</blockquote>
+<p>8.怎么遍历一个map？写一下。</p>
+<blockquote>
+<p>1</p>
+<figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="keyword">for</span>(<span class="keyword">String</span> <span class="built_in">key</span> : <span class="built_in">map</span>.keySet())&#123;</span><br><span class="line">&gt;     System.out.<span class="built_in">println</span>(<span class="built_in">key</span>+<span class="string">" "</span>+<span class="built_in">map</span>.<span class="built_in">get</span>(<span class="built_in">key</span>)+<span class="string">""</span>);</span><br><span class="line">&gt; &#125;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>2</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="meta">while</span>(<span class="keyword">iterator.hasNext())&#123;</span></span><br><span class="line"><span class="keyword">&gt; </span>    <span class="meta">Map</span>.Entry&lt;<span class="keyword">String,String&gt; </span><span class="meta">entry</span><span class="symbol">=iterator</span>.next()<span class="comment">;</span></span><br><span class="line">&gt;     System.out.println(<span class="meta">entry</span>.getKey()+<span class="string">" "</span>+<span class="meta">entry</span>.getValue()+<span class="string">""</span>)<span class="comment">;</span></span><br><span class="line">&gt; &#125;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>3:推荐，尤其是容量大时</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; for(<span class="meta">Map</span>.Entry&lt;<span class="keyword">String,String&gt; </span><span class="meta">entry</span> :<span class="meta">map</span>.entrySet())&#123;</span><br><span class="line">&gt;     System.out.println(<span class="meta">entry</span>.getKey()+<span class="string">" "</span>+<span class="meta">entry</span>.getValue()+<span class="string">""</span>)<span class="comment">;</span></span><br><span class="line">&gt; &#125;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>4:只遍历值</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash"> <span class="keyword">for</span>(String v:map.values())&#123;</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">     System.out.println(v+<span class="string">""</span>);</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> &#125;</span></span><br><span class="line"><span class="meta">&gt;</span></span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>9.说一下list，set，map的区别。</p>
+<blockquote>
+<p>List：1.可以允许重复的对象。</p>
+<p>　　  2.可以插入多个null元素。</p>
+<p>​    3.是一个有序容器，保持了每个元素的插入顺序，输出的顺序就是插入的顺序。</p>
+<p>​    4.常用的实现类有 ArrayList、LinkedList 和 Vector。ArrayList 最为流行，它提供了使用索引的随意访问，而 LinkedList 则对于经常需要从 List 中添加或删除元素的场合更为合适。</p>
+<p> Set：1.不允许重复对象</p>
+<p>　　  2. 无序容器，你无法保证每个元素的存储顺序，TreeSet通过 Comparator  或者 Comparable 维护了一个排序顺序。</p>
+<p>​    \3. 只允许一个 null 元素</p>
+<p>​    4.Set 接口最流行的几个实现类是 HashSet、LinkedHashSet 以及 TreeSet。最流行的是基于 HashMap 实现的 HashSet；TreeSet 还实现了 SortedSet 接口，因此 TreeSet 是一个根据其 compare() 和 compareTo() 的定义进行排序的有序容器。</p>
+<p>Map：1.Map不是collection的子接口或者实现类。Map是一个接口。</p>
+<p>​      2.Map 的 每个 Entry 都持有两个对象，也就是一个键一个值，Map 可能会持有相同的值对象但键对象必须是唯一的。</p>
+<p>​      \3. TreeMap 也通过 Comparator  或者 Comparable 维护了一个排序顺序。</p>
+<p>​      \4. Map 里你可以拥有随意个 null 值但最多只能有一个 null 键。</p>
+<p>​    5.Map 接口最流行的几个实现类是 HashMap、LinkedHashMap、Hashtable 和 TreeMap。（HashMap、TreeMap最常用）</p>
+<p>延伸：</p>
+<p>2.面试题：什么场景下使用list，set，map呢？</p>
+<p>（或者会问为什么这里要用list、或者set、map，这里回答它们的优缺点就可以了）</p>
+<p>答：</p>
+<ol>
+<li>如果你经常会使用索引来对容器中的元素进行访问，那么 List 是你的正确的选择。如果你已经知道索引了的话，那么 List 的实现类比如 ArrayList 可以提供更快速的访问,如果经常添加删除元素的，那么肯定要选择LinkedList。</li>
+<li>如果你想容器中的元素能够按照它们插入的次序进行有序存储，那么还是 List，因为 List 是一个有序容器，它按照插入顺序进行存储。</li>
+<li>如果你想保证插入元素的唯一性，也就是你不想有重复值的出现，那么可以选择一个 Set 的实现类，比如 HashSet、LinkedHashSet 或者 TreeSet。所有 Set 的实现类都遵循了统一约束比如唯一性，而且还提供了额外的特性比如 TreeSet 还是一个 SortedSet，所有存储于 TreeSet 中的元素可以使用 Java 里的 Comparator 或者 Comparable 进行排序。LinkedHashSet 也按照元素的插入顺序对它们进行存储。</li>
+<li>如果你以键和值的形式进行数据存储那么 Map 是你正确的选择。你可以根据你的后续需要从 Hashtable、HashMap、TreeMap 中进行选择。</li>
+</ol>
+<p><a href="https://www.cnblogs.com/IvesHe/p/6108933.html" target="_blank" rel="noopener">https://www.cnblogs.com/IvesHe/p/6108933.html</a></p>
+</blockquote>
+<p>10.你的项目中用的是多线程还是单线程？</p>
+<p>11.多线程会遇到那些问题？怎么解决死锁？</p>
+<blockquote>
+<p>Java程序基本都要涉及到多线程，而在多线程环境中不可避免的要遇到线程死锁的问题。Java不像数据库那么能够检测到死锁，然后进行处理，Java中的死锁问题，只能通过程序员自己写代码时避免引入死锁的可能性来解决。</p>
+<p>产生死锁可能性的最根本原因是：<strong>线程在获得一个锁L1的情况下再去申请另外一个锁L2，也就是锁L1想要包含了锁L2，也就是说在获得了锁L1，并且没有释放锁L1的情况下，又去申请获得锁L2，这个是产生死锁的最根本原因</strong>。另一个原因是<strong>默认的锁申请操作是阻塞的</strong>。</p>
+<p>避免死锁的方法:</p>
+<p>1,尽量减少同步范围，即synchronized如果能只包围一个对象，就不要包围这个对象所在方法</p>
+<p>2，申请锁的减少交叉，按顺序申请</p>
+<p>3，死锁一般是会有一个死锁环，添加睡眠可以减少死锁环的概率</p>
+</blockquote>
+<p>12.用java写一个多线程程序，如写四个线程，二个加1，二个对一变量减一，输出：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> Other;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StudyThread</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> j = <span class="number">1</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">inc</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        j++;</span><br><span class="line">        System.out.println(Thread.currentThread().getName() + <span class="string">"-inc:"</span> + j);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">dec</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        j--;</span><br><span class="line">        System.out.println(Thread.currentThread().getName() + <span class="string">"-inc:"</span> + j);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Tinc</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            inc();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Tdec</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            dec();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123;</span><br><span class="line">        StudyThread studyThread = <span class="keyword">new</span> StudyThread();</span><br><span class="line">        Tinc t1 = studyThread.<span class="keyword">new</span> Tinc();</span><br><span class="line">        Tdec t11=studyThread.<span class="keyword">new</span> Tdec();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">2</span>;i++)&#123;</span><br><span class="line">            Thread thread=<span class="keyword">new</span> Thread(t1);</span><br><span class="line">            thread.start();</span><br><span class="line">            Thread thread1=<span class="keyword">new</span> Thread(t11);</span><br><span class="line">            thread1.start();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>13.至少说六点interface和abstract的区别。</p>
+<blockquote>
+<p> <strong>1.相同点</strong><br>A. 两者都是抽象类，都不能实例化。<br>B. interface实现类及abstrctclass的子类都必须要实现已经声明的抽象方法。</p>
+<p><strong>2. 不同点</strong> </p>
+<p>A. interface需要实现，要用implements，而abstract class需要继承，要用extends。<br>B. 一个类可以实现多个interface，但一个类只能继承一个abstract class。<br>C. interface强调特定功能的实现，而abstractclass强调所属关系。<br>D. 尽管interface实现类及abstrct class的子类都必须要实现相应的抽象方法，但实现的形式不同。interface中的每一个方法都是抽象方法，都只是声明的(declaration,没有方法体)，实现类必须要实现。而abstractclass的子类可以有选择地实现。 </p>
+<p>E. abstract class是interface与Class的中介。<br>interface是完全抽象的，只能声明方法，而且只能声明pulic的方法，不能声明private及protected的方法，不能定义方法体，也不能声明实例变量。然而，interface却可以声明常量变量，并且在JDK中不难找出这种例子。但将常量变量放在interface中违背了其作为接口的作用而存在的宗旨，也混淆了interface与类的不同价值。如果的确需要，可以将其放在相应的abstractclass或Class中。<br>abstract class在interface及Class中起到了承上启下的作用。一方面，abstract class是抽象的，可以声明抽象方法，以规范子类必须实现的功能；另一方面，它又可以定义缺省的方法体，供子类直接使用或覆盖。另外，它还可以定义自己的实例变量，以供子类通过继承来使用。</p>
+<p>  一是Abastract class中并非所有的方法都是抽象的，只有那些冠有abstract的方法才是抽象的，子类必须实现。那些没有abstract的方法，在Abstrct class中必须定义方法体。<br>  二是abstract class的子类在继承它时，对非抽象方法既可以直接继承，也可以覆盖；而对抽象方法，可以选择实现，也可以通过再次声明其方法为抽象的方式，无需实现，留给其子类来实现，但此类必须也声明为抽象类。既是抽象类，当然也不能实例化。 </p>
+<p>1.abstract class 在 Java 语言中表示的是一种继承关系，一个类只能使用一次继承关系。但是，一个类却可以实现多个interface。</p>
+<p>　 　2.在abstract class 中可以有自己的数据成员，也可以有非abstarct的成员方法，而在interface中，只能够有静态的不能被修改的数据成员（也就是必须是static final的，不过在 interface中一般不定义数据成员），所有的成员方法都是abstract的。<br>　　 3.abstract class和interface所反映出的设计理念不同。其实abstract class表示的是”is-a”关系，interface表示的是”like-a”关系。<br>　　 4.实现抽象类和接口的类必须实现其中的所有方法。抽象类中可以有非<a href="https://www.baidu.com/s?wd=抽象方法&amp;tn=44039180_cpr&amp;fenlei=mv6quAkxTZn0IZRqIHckPjm4nH00T1dWPWK-nyNWPynLuHP9mH7-0ZwV5Hcvrjm3rH6sPfKWUMw85HfYnjn4nH6sgvPsT6KdThsqpZwYTjCEQLGCpyw9Uz4Bmy-bIi4WUvYETgN-TLwGUv3En1TznWfvn1c3P1fdPW61PW0Y" target="_blank" rel="noopener">抽象方法</a>。接口中则不能有实现方法。<br>　 　5.接口中定义的变量默认是public static final 型，且必须给其初值，所以实现类中不能重新定义，也不能改变其值。<br>　 　6.抽象类中的变量默认是 friendly 型，其值可以在子类中重新定义，也可以重新赋值。<br>　　 7.接口中的方法默认都是 public abstract 类型的。</p>
+</blockquote>
+<p>14.怎么把数组放到对象里面？</p>
+<blockquote>
+<p>问题比较模糊</p>
+</blockquote>
+<p>15.给你一组字符串如：7i8hy4jjnb2.让你编程输出里面的数字：7842.</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">for (<span class="name">int</span> i = <span class="number">0</span><span class="comment">; i &lt; str.length(); i++) &#123;</span></span><br><span class="line">    if (<span class="name">Character</span>.isDigit(<span class="name">str</span>.charAt(<span class="name">i</span>))) &#123;</span><br><span class="line">        char c = str.charAt(<span class="name">i</span>)<span class="comment">;</span></span><br><span class="line">        System.out.print(<span class="name">c</span>)<span class="comment">;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>或：</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">String </span><span class="keyword">str1 </span>= <span class="keyword">str.replaceAll("[a-z]", </span><span class="string">""</span>)<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<p>16.多线程有几种实现方式？都是什么？同步有几种实现方式？都是什么？</p>
+<blockquote>
+<p>Java多线程实现的三种方式：</p>
+<p>1,继承Thread类创建线程类:重写父类run( )方法</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">thread1</span> <span class="title">extends</span> <span class="title">Thread</span> &#123;</span></span><br><span class="line">&gt;     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">&gt;         <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10000</span>; i++) &#123;</span><br><span class="line">&gt;             System.out.<span class="built_in">println</span>(<span class="string">"线程一"</span>+i);</span><br><span class="line">&gt;         &#125;</span><br><span class="line">&gt;     &#125;</span><br><span class="line">&gt; </span><br><span class="line">&gt;     <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(<span class="keyword">String</span>[] args)</span> </span>&#123;</span><br><span class="line">&gt;         thread1 th1 = <span class="keyword">new</span> thread1();</span><br><span class="line">&gt;         thread1 th2 = <span class="keyword">new</span> thread1();</span><br><span class="line">&gt;         th1.<span class="built_in">run</span>();</span><br><span class="line">&gt;         th2.<span class="built_in">run</span>();</span><br><span class="line">&gt;     &#125;</span><br><span class="line">&gt; &#125;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p> run( )方法只是普通的方法，是顺序执行的，虽然我们是写了一个线程，但是并没有体现出多线程的意义。为了体现多线程，应该使用start( )方法来启动线程，start()方法会自动调用run( )方法。所以上面的代码改为：</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">thread1</span> <span class="title">extends</span> <span class="title">Thread</span> &#123;</span></span><br><span class="line">&gt;     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">&gt;         <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10000</span>; i++) &#123;</span><br><span class="line">&gt;             System.out.<span class="built_in">println</span>(<span class="string">"线程一"</span>+i);</span><br><span class="line">&gt;         &#125;</span><br><span class="line">&gt;     &#125;</span><br><span class="line">&gt;     <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(<span class="keyword">String</span>[] args)</span> </span>&#123;</span><br><span class="line">&gt;         thread1 th1 = <span class="keyword">new</span> thread1();</span><br><span class="line">&gt;         thread1 th2 = <span class="keyword">new</span> thread1();</span><br><span class="line">&gt;         th1.start();</span><br><span class="line">&gt;         th2.start();</span><br><span class="line">&gt;     &#125;</span><br><span class="line">&gt; &#125;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>通过start( )方法启动的线程。不管th1.start( )调用的run( )方法是否执行完，都继续执行th2.start( )。如果下面有别的代码也同样不需要等待th2.start( )执行完而继续执行。</p>
+<p>2,实现Runnable接口创建线程类</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">thread2</span> <span class="title">implements</span> <span class="title">Runnable</span> &#123;</span></span><br><span class="line">&gt;     <span class="keyword">public</span> <span class="keyword">String</span> ThreadName;</span><br><span class="line">&gt; </span><br><span class="line">&gt;     <span class="function"><span class="keyword">public</span> <span class="title">thread2</span><span class="params">(<span class="keyword">String</span> tName)</span></span>&#123;</span><br><span class="line">&gt;         ThreadName = tName;</span><br><span class="line">&gt;     &#125;</span><br><span class="line">&gt; </span><br><span class="line">&gt;     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">&gt;         <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10000</span>; i++) &#123;</span><br><span class="line">&gt;             System.out.<span class="built_in">println</span>(ThreadName);</span><br><span class="line">&gt;         &#125;</span><br><span class="line">&gt;     &#125;</span><br><span class="line">&gt;     <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(<span class="keyword">String</span>[] args)</span> </span>&#123;</span><br><span class="line">&gt;         thread2 th1 = <span class="keyword">new</span> thread2(<span class="string">"线程A"</span>);</span><br><span class="line">&gt;         thread2 th2 = <span class="keyword">new</span> thread2(<span class="string">"线程B"</span>);</span><br><span class="line">&gt;         Thread myth1 = <span class="keyword">new</span> Thread(th1);</span><br><span class="line">&gt;         Thread myth2 = <span class="keyword">new</span> Thread(th2);</span><br><span class="line">&gt;         myth1.start();</span><br><span class="line">&gt;         myth2.start();</span><br><span class="line">&gt;     &#125;</span><br><span class="line">&gt; &#125;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>  其实Thread类也是实现了Runnable接口，代表了一个线程的实例，并且启动线程唯一的方法就是通过Thread类的start( )方法。所以第二种实现多线程的方法必须要提拔个工艺new一个Thread类去启动线程。同样的，也不能只是运行run( )方法，因为这样只是一个线程。</p>
+<p>3,使用ExecutorService、Callable、Future实现由返回结果的多线程</p>
+<p> 这种方式是之前没有尝试过的，ExecutorService是一个线程池接口，可返回值的任务必须实现Callable接口，无返回值得任务必须实现Runnable接口。执行Callable任务后，可以获取一个Future对象，在该对象上调用get就可以获取到Callable任务返回的Object了，再结合ExecutorService接口就可以实现有返回结果的多线程了</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash"> /**</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">  * 有返回值的线程 </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">  */</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> @SuppressWarnings(<span class="string">"unchecked"</span>)</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> class Test &#123;</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">     public static void main(String[] args) throws ExecutionException,</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">             InterruptedException &#123;</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">         System.out.println(<span class="string">"----程序开始运行----"</span>);</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">         Date date1 = new Date();</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">         int taskSize = 5;</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">         // 创建一个线程池  </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">         ExecutorService pool = Executors.newFixedThreadPool(taskSize);</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">         // 创建多个有返回值的任务  </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">         List&lt;Future&gt; list = new ArrayList&lt;Future&gt;();</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">         <span class="keyword">for</span> (int i = 0; i &lt; taskSize; i++) &#123;</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">             Callable c = new MyCallable(i + <span class="string">" "</span>);</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">             // 执行任务并获取Future对象  </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">             Future f = pool.submit(c);</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">             // System.out.println(<span class="string">"&gt;&gt;&gt;"</span> + f.get().toString());  </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">             list.add(f);</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">         &#125;</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">         // 关闭线程池  </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">         pool.shutdown();</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">         // 获取所有并发任务的运行结果  </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">         <span class="keyword">for</span> (Future f : list) &#123;</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">             // 从Future对象上获取任务的返回值，并输出到控制台  </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">             System.out.println(<span class="string">"&gt;&gt;&gt;"</span> + f.get().toString());</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">         &#125;</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">         Date date2 = new Date();</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">         System.out.println(<span class="string">"----程序结束运行----，程序运行时间【"</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">                 + (date2.getTime() - date1.getTime()) + <span class="string">"毫秒】"</span>);</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">     &#125;</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> &#125;</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> class MyCallable implements Callable&lt;Object&gt; &#123;</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">     private String taskNum;</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">     MyCallable(String taskNum) &#123;</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">         this.taskNum = taskNum;</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">     &#125;</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">     public Object call() throws Exception &#123;</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">         System.out.println(<span class="string">"&gt;&gt;&gt;"</span> + taskNum + <span class="string">"任务启动"</span>);</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">         Date dateTmp1 = new Date();</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">         Thread.sleep(1000);</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">         Date dateTmp2 = new Date();</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">         long time = dateTmp2.getTime() - dateTmp1.getTime();</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">         System.out.println(<span class="string">"&gt;&gt;&gt;"</span> + taskNum + <span class="string">"任务终止"</span>);</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">         <span class="built_in">return</span> taskNum + <span class="string">"任务返回运行结果,当前任务时间【"</span> + time + <span class="string">"毫秒】"</span>;</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">     &#125;</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> &#125;</span></span><br><span class="line"><span class="meta">&gt;</span></span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>同步的实现方法有五种：1.同步方法；2.同步代码块；3.使用特殊域变量(volatile)实现<a href="https://www.baidu.com/s?wd=线程同步&amp;tn=44039180_cpr&amp;fenlei=mv6quAkxTZn0IZRqIHckPjm4nH00T1dBryRLuWDYnAFbuAckn1Dd0ZwV5Hcvrjm3rH6sPfKWUMw85HfYnjn4nH6sgvPsT6KdThsqpZwYTjCEQLGCpyw9Uz4Bmy-bIi4WUvYETgN-TLwGUv3EnHTvrH03njRsrHR4PjTkPWnsn0" target="_blank" rel="noopener">线程同步</a>；4.使用重入锁实现<a href="https://www.baidu.com/s?wd=线程同步&amp;tn=44039180_cpr&amp;fenlei=mv6quAkxTZn0IZRqIHckPjm4nH00T1dBryRLuWDYnAFbuAckn1Dd0ZwV5Hcvrjm3rH6sPfKWUMw85HfYnjn4nH6sgvPsT6KdThsqpZwYTjCEQLGCpyw9Uz4Bmy-bIi4WUvYETgN-TLwGUv3EnHTvrH03njRsrHR4PjTkPWnsn0" target="_blank" rel="noopener">线程同步</a>；5.使用局部变量实现<a href="https://www.baidu.com/s?wd=线程同步&amp;tn=44039180_cpr&amp;fenlei=mv6quAkxTZn0IZRqIHckPjm4nH00T1dBryRLuWDYnAFbuAckn1Dd0ZwV5Hcvrjm3rH6sPfKWUMw85HfYnjn4nH6sgvPsT6KdThsqpZwYTjCEQLGCpyw9Uz4Bmy-bIi4WUvYETgN-TLwGUv3EnHTvrH03njRsrHR4PjTkPWnsn0" target="_blank" rel="noopener">线程同步</a> 。</p>
+<p>其中<a href="https://www.baidu.com/s?wd=多线程&amp;tn=44039180_cpr&amp;fenlei=mv6quAkxTZn0IZRqIHckPjm4nH00T1dBryRLuWDYnAFbuAckn1Dd0ZwV5Hcvrjm3rH6sPfKWUMw85HfYnjn4nH6sgvPsT6KdThsqpZwYTjCEQLGCpyw9Uz4Bmy-bIi4WUvYETgN-TLwGUv3EnHTvrH03njRsrHR4PjTkPWnsn0" target="_blank" rel="noopener">多线程</a>实现过程中需注意重写或者覆盖run()方法，而对于同步的实现方法中使用较常使用的是利用synchronized编写同步方法和代码块。</p>
+</blockquote>
+<p> 17.java类实现序列化有几种实现方式？都是什么？（二种）不熟悉</p>
+<blockquote>
+<p>Java对象的序列化有两种方式。</p>
+<p>a.是相应的对象实现了序列化接口Serializable，这个使用的比较多，对于序列化接口Serializable接口是一个空的接口，它的主要作用就是 标识这个对象时可序列化的，jre对象在传输对象的时候会进行相关的封装。这里就不做过多的介绍了。</p>
+<p>b.实现序列化的第二种方式为实现接口Externalizable</p>
+<p>1，首先，我们在序列化对象的时候，由于这个类实现了Externalizable 接口，在writeExternal()方法里定义了哪些属性可以序列化，</p>
+<p>2.也是最应该注意的，如果你先序列化对象A后序列化B，那么在反序列化的时候一定记着JAVA规定先读到的对象 是先被序列化的对象，不要先接收对象B，那样会报错.尤其在使用上面的Externalizable的时候一定要注意读取 的先后顺序。 3.实现序列化接口的对象并不强制声明唯一的serialVersionUID，是否声明serialVersionUID对于对象序列化的向 上向下的兼容性有很大的影响。,</p>
+<p><a href="https://blog.csdn.net/u012554102/article/details/51902697" target="_blank" rel="noopener">https://blog.csdn.net/u012554102/article/details/51902697</a></p>
+</blockquote>
+<p>18.java开发中“==” 和 “equals” 有何区别？</p>
+<blockquote>
+<p>==判断的是两个字符串地址是否相同<br>.equals才是比较字符串内容</p>
+</blockquote>
+<p>19.static局部变量与全局变量的区别，编译后映射文件是否包含此类变量的地址。</p>
+<blockquote>
+<p>改问题：static全局变量与普通的全局变量有什么区别？</p>
+<p>​       static局部变量和普通局部变量有什么区别？</p>
+<p>​       static函数与普通函数有什么区别？ 　　</p>
+<p>1) 全局变量(外部变量)的说明之前再冠以static 就构成了静态的全局变量。全局变量本身就是静态存储方式， 静态全局变量当然也是静态存储方式。 这两者在存储方式上并无不同。这两者的区别在于非静态全局变量的作用域是整个源程序， 当一个源程序由多个源文件组成时，非静态的全局变量在各个源文件中都是有效的。 而静态全局变量则限制了其作用域， 即只在定义该变量的源文件内有效， 在同一源程序的其它源文件中不能使用它。由于静态全局变量的作用域局限于一个源文件内，只能为该源文件内的函数公用， 因此可以避免在其它源文件中引起错误。 </p>
+<p>2) 从以上分析可以看出， 把局部变量改变为静态变量后是改变了它的存储方式即改变了它的生存期。</p>
+<p>   把全局变量改变为静态变量后是改变了它的作用域，限制了它的使用范围。</p>
+<p>3) static函数与普通函数作用域不同,仅在本文件。只在当前源文件中使用的函数应该说明为内部函数(static)，内部函数应该在当前源文件中说明和定义。对于可在当前源文件以外使用的函数，应该在一个头文件中说明，要使用这些函数的源文件要包含这个头文件 </p>
+<p><a href="https://blog.csdn.net/u012497906/article/details/48522715" target="_blank" rel="noopener">https://blog.csdn.net/u012497906/article/details/48522715</a></p>
+<p><a href="https://www.cnblogs.com/michaelShao/p/6698504.html" target="_blank" rel="noopener">https://www.cnblogs.com/michaelShao/p/6698504.html</a></p>
+</blockquote>
+<p>20.在日常工作中，使用过哪些 java core 包，遇到java core 的那些异常？（可以写中文）</p>
+<blockquote>
+<p>JAVA分为J2SE， <a href="https://www.baidu.com/s?wd=J2EE&amp;from=1012015a&amp;fenlei=mv6quAkxTZn0IZRqIHckPjm4nH00T1dBrjRYPHFbPj-BuAm3rH040ZwV5Hcvrjm3rH6sPfKWUMw85HfYnjn4nH6sgvPsT6KdThsqpZwYTjCEQLGCpyw9Uz4Bmy-bIi4WUvYETgN-TLwGUv3En1RdnHDkr0" target="_blank" rel="noopener">J2EE</a> ，<a href="https://www.baidu.com/s?wd=J2ME&amp;from=1012015a&amp;fenlei=mv6quAkxTZn0IZRqIHckPjm4nH00T1dBrjRYPHFbPj-BuAm3rH040ZwV5Hcvrjm3rH6sPfKWUMw85HfYnjn4nH6sgvPsT6KdThsqpZwYTjCEQLGCpyw9Uz4Bmy-bIi4WUvYETgN-TLwGUv3En1RdnHDkr0" target="_blank" rel="noopener">J2ME</a>三个版本</p>
+<p>其中J2SE包括Core JAVA和Desktop JAVA<br>Core JA<img src="https://static.oschina.net/uploads/img/201804/16144310_vWkq.png" alt="搜索">VA主要是<a href="https://www.baidu.com/s?wd=JAVA语言&amp;from=1012015a&amp;fenlei=mv6quAkxTZn0IZRqIHckPjm4nH00T1dBrjRYPHFbPj-BuAm3rH040ZwV5Hcvrjm3rH6sPfKWUMw85HfYnjn4nH6sgvPsT6KdThsqpZwYTjCEQLGCpyw9Uz4Bmy-bIi4WUvYETgN-TLwGUv3En1RdnHDkr0" target="_blank" rel="noopener">JAVA语言</a>方面的内容<br>Desktop JAVA主要是JAVA的桌面应用方面的内容</p>
+</blockquote>
+<p>21.在servlet中怎么获取页面传过来的 name=”a” 或者 id=”b” 的<input>输入框的值？</p>
+<blockquote>
+<p>在servlet中获取请求中的表单值，是通过request.getParameter(“参数时input标签的name”);<br>在jsp页面上获取一个input标签的值，那就用document.getElementById().value;或者document.getElementsByName().value;</p>
+</blockquote>
+<p>22.jsp和servlet有哪些相同点和不同点，他们之间的联系是什么？为什么要用jsp做显示而不用servlet？</p>
+<blockquote>
+<p>jsp及Servlet经典面试题以及答案:这个问题更全</p>
+<p><a href="https://blog.csdn.net/u013842976/article/details/52275344" target="_blank" rel="noopener">https://blog.csdn.net/u013842976/article/details/52275344</a></p>
+</blockquote>
+<blockquote>
+<p>插入:session与cookie的差别</p>
+<p>1，session 在服务器端，cookie 在客户端（浏览器）<br>2，session 默认被存在在服务器的一个文件里（不是内存）<br>3，session 的运行依赖 session id，而 session id 是存在 cookie 中的，也就是说，如果浏览器禁用了 cookie ，同时 session 也会失效（但是可以通过其它方式实现，比如在 url 中传递 session_id）<br>4，session 可以放在 文件、数据库、或内存中都可以。<br>5，用户验证这种场合一般会用 session</p>
+<p>因此，维持一个会话的核心就是客户端的唯一标识，即 session id</p>
+</blockquote>
+<p>23.说一下servlet的生命周期，在执行servlet的过程中分别执行了哪些方法？每个方法具体负责什么？可以实现一些什么内容？</p>
+<blockquote>
+<p><a href="https://blog.csdn.net/javaloveiphone/article/details/8154791" target="_blank" rel="noopener">https://blog.csdn.net/javaloveiphone/article/details/8154791</a></p>
+</blockquote>
+<p>24，你知道easyUI吗？</p>
+<blockquote>
+<p>jQuery EasyUI是一组基于jQuery的UI插件集合体，而jQuery EasyUI的目标就是帮助web开发者更轻松的打造出功能丰富并且美观的UI界面。开发者不需要编写复杂的javascript，也不需要对css样式有深入的了解，开发者需要了解的只有一些简单的html标签。</p>
+<p><a href="https://baike.baidu.com/item/jQueryEasyUI/1733327?fr=aladdin" target="_blank" rel="noopener">https://baike.baidu.com/item/jQueryEasyUI/1733327?fr=aladdin</a></p>
+</blockquote>
+<p>25.<div><span>1</span><span>2</span><span>3</span></div>如何获取第二个span的值？</p>
+<blockquote>
+<p>简单</p>
+</blockquote>
+<p>26.用js或者jquery获取页面上name=”a” 或者 id=”b” <input>输入框的值.</p>
+
+
+                <hr>
+
+                
+
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2020/10/19/postgreSQL/" data-toggle="tooltip" data-placement="top" title="postgreSQL">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2020/10/15/我的博客开通了/" data-toggle="tooltip" data-placement="top" title="我的博客开通了">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+            </div>
+    <!-- Side Catalog Container -->
+        
+
+    <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#面试题Java成神之路" title="面试题Java成神之路">面试题Java成神之路</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="#" target="_blank">并未开通</a></li>
+                    
+                        <li><a href="#" target="_blank">并未开通</a></li>
+                    
+                        <li><a href="#" target="_blank">Foo</a></li>
+                    
+                        <li><a href="#" target="_blank">Bar</a></li>
+                    
+                        <li><a href="#" target="_blank">Example Friends</a></li>
+                    
+                        <li><a href="#" target="_blank">It helps SEO</a></li>
+                    
+                </ul>
+                
+            </div>
+
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "hexo-theme-huxblog";
+    var disqus_identifier = "https://zhanghangwei-git.github.io/2020/10/19/中级java工程师/";
+    var disqus_url = "https://zhanghangwei-git.github.io/2020/10/19/中级java工程师/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+	
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/Demonbane_x">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/Demonbane">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/Demonbane">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/demonbane.cn">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/Kaijun">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://www.linkedin.com/in/kaijun-chen-42089354">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Hades Blog 2020 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    Ported by <a href="http://blog.kaijun.rocks">Kaijun</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=kaijun&repo=hexo-theme-huxblog&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://zhanghangwei-git.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hades
+    var _gaId = 'UA-49627206-1';
+    var _gaDomain = 'huangxuan.me';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = '4cc1f2d8f3067386cc5cdb626a202900';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- Side Catalog -->
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="https://zhanghangwei-git.github.io/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
